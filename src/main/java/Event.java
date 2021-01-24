@@ -1,3 +1,12 @@
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +19,17 @@
  */
 public class Event extends javax.swing.JFrame {
 
+  
     /**
      * Creates new form Event
      */
     public Event() {
         initComponents();
+    }
+    
+    public Event(String eventName, Date eventDate, String duration, String location, String participants, String priority, String reminder){
+       
+    
     }
     
 
@@ -36,14 +51,14 @@ public class Event extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        reminderBox = new javax.swing.JComboBox<>();
+        priorityComboBox = new javax.swing.JComboBox<>();
+        reminderComboBox = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jtxtEventName = new javax.swing.JTextField();
         jlEventName = new javax.swing.JLabel();
-        jDateChooser = new com.toedter.calendar.JDateChooser();
+        jDateChooseriDate = new com.toedter.calendar.JDateChooser();
         jlDate = new javax.swing.JLabel();
         jlDuration = new javax.swing.JLabel();
         jtxtDuration = new javax.swing.JTextField();
@@ -71,6 +86,11 @@ public class Event extends javax.swing.JFrame {
         jbtnSave.setBackground(new java.awt.Color(255, 255, 255));
         jbtnSave.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnSave.setText("Save");
+        jbtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,16 +128,16 @@ public class Event extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel7.setText("Priority");
 
-        jComboBox2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "high", "medium", "low" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        priorityComboBox.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        priorityComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "high", "medium", "low" }));
+        priorityComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                priorityComboBoxActionPerformed(evt);
             }
         });
 
-        reminderBox.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        reminderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 week", "3 days", "1 hour", "10 minutes" }));
+        reminderComboBox.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        reminderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 week", "3 days", "1 hour", "10 minutes" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -130,8 +150,8 @@ public class Event extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(reminderBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priorityComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reminderComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -139,12 +159,12 @@ public class Event extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priorityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(reminderBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(reminderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -221,7 +241,7 @@ public class Event extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                                 .addComponent(jlParticipants, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jtxtParticipant))
+                                .addComponent(jtxtParticipant, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                                 .addComponent(jlLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -229,7 +249,7 @@ public class Event extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                                 .addComponent(jlDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jDateChooseriDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                                 .addComponent(jlDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,7 +266,7 @@ public class Event extends javax.swing.JFrame {
                     .addComponent(jlEventName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooseriDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -323,13 +343,48 @@ public class Event extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void priorityComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priorityComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_priorityComboBoxActionPerformed
 
     private void jtxtEventNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtEventNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtEventNameActionPerformed
+
+    private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
+ 
+        
+        Connection connection = DBconnection.connectToDatabase();
+  
+        if(connection != null){
+            try {
+                
+                PreparedStatement pstmt = (PreparedStatement)
+                   connection.prepareStatement("insert into events(eventName,eventDate ,duration,location,participants"
+                           + ",priority,reminder) values(?,?,?,?,?,?,?");
+                
+                pstmt.setString(1,jtxtEventName.getText());
+                pstmt.setDate(2,(Date)jDateChooseriDate.getDate());
+                pstmt.setString(3,jtxtDuration.getText());
+                pstmt.setString(4,jtxtLocation.getText());
+                pstmt.setString(5,jtxtParticipant.getText());
+                pstmt.setString(5,priorityComboBox.getSelectedItem().toString());
+                pstmt.setString(5,reminderComboBox.getSelectedItem().toString());
+                
+                int rs= pstmt.executeUpdate(); 
+                JOptionPane.showMessageDialog(this, "Event added successfully","DONE",JOptionPane.INFORMATION_MESSAGE);  
+                this.dispose();
+                CalendarPage cal = new CalendarPage();
+                cal.setVisible(true);
+            } catch (SQLException ex) {
+                 JOptionPane.showMessageDialog(null,"Event Failed"+ex);
+            }
+        }else{
+                System.out.println("NO DATABASE CONNECTION!");
+                }
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,8 +422,7 @@ public class Event extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser;
+    private com.toedter.calendar.JDateChooser jDateChooseriDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -390,6 +444,7 @@ public class Event extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtEventName;
     private javax.swing.JTextField jtxtLocation;
     private javax.swing.JTextField jtxtParticipant;
-    private javax.swing.JComboBox<String> reminderBox;
+    private javax.swing.JComboBox<String> priorityComboBox;
+    private javax.swing.JComboBox<String> reminderComboBox;
     // End of variables declaration//GEN-END:variables
 }
