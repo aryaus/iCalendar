@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class ICalendarFrame extends javax.swing.JFrame {
 
+    public String _user;
+    public String _password;
+    public int _userId;
     /**
      * Creates new form ICalendarFrame
      */
@@ -231,6 +234,8 @@ public class ICalendarFrame extends javax.swing.JFrame {
                 pstmt.setString(1,username);
                 pstmt.setString(2,password);
                 ResultSet rs= pstmt.executeQuery();
+                _user = username;
+                _password = password;
                 if(rs.next()){
                     //display Event
                     dispose();

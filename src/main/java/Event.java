@@ -27,10 +27,7 @@ public class Event extends javax.swing.JFrame {
         initComponents();
     }
     
-    public Event(String eventName, Date eventDate, String duration, String location, String participants, String priority, String reminder){
-       
-    
-    }
+   
     
 
     /**
@@ -360,8 +357,8 @@ public class Event extends javax.swing.JFrame {
             try {
                 
                 PreparedStatement pstmt = (PreparedStatement)
-                   connection.prepareStatement("insert into events(eventName,eventDate ,duration,location,participants"
-                           + ",priority,reminder) values(?,?,?,?,?,?,?");
+                connection.prepareStatement("insert into events(eventId,eventName,eventDate ,duration,location,participants"
+                           + ",priority,reminder) values(?,?,?,?,?,?,?,?");
                 
                 pstmt.setString(1,jtxtEventName.getText());
                 pstmt.setDate(2,(Date)jDateChooseriDate.getDate());
@@ -386,6 +383,8 @@ public class Event extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
+    public void 
+    
     /**
      * @param args the command line arguments
      */
