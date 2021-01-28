@@ -1,16 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.print.PrinterException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -19,53 +19,136 @@ import javax.swing.table.TableCellRenderer;
  * @author Pouya Nikbakhsh
  */
 public class TableColorCellRenderer extends DefaultTableCellRenderer {
-    
-        TableCellRenderer render;
-        Border b;
         
-        public TableColorCellRenderer(TableCellRenderer r, Color top, Color left,Color bottom, Color right){
-            render = r;
-            
-            //It looks funky to have a different color on each side - but this is what you asked
-            //You can comment out borders if you want too. (example try commenting out top and left borders)
-            b = BorderFactory.createCompoundBorder();
-            b = BorderFactory.createCompoundBorder(b, BorderFactory.createMatteBorder(2,0,0,0,top));
-            b = BorderFactory.createCompoundBorder(b, BorderFactory.createMatteBorder(0,2,0,0,left));
-            b = BorderFactory.createCompoundBorder(b, BorderFactory.createMatteBorder(0,0,2,0,bottom));
-            b = BorderFactory.createCompoundBorder(b, BorderFactory.createMatteBorder(0,0,0,2,right));
-        }
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int current_day = calendar.get(Calendar.DATE);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        // first day of month with f_row and f_column
+        int f_row; 
+        int f_column;
+        int c_row;
+        int c_column;
+        int month_inRenderer;
+        int year_inRenderer;
+        int current_year = calendar.get(Calendar.YEAR);
+        int current_month = calendar.get(Calendar.MONTH) + 1;
+        Color myColor = new Color(218, 218, 241);
+        Color currentDay_Color = new Color(181, 181, 227);
+        
+        int select_cell_column = CalendarPage.select_cell_column;;
+        int select_cell_row = CalendarPage.select_cell_row;
+        
 
+        
+        public TableColorCellRenderer(int month_inRenderer, int year_inRenderer){
+//            this.select_cell_column = CalendarPage.select_cell_column;
+//            this.select_cell_row = CalendarPage.select_cell_row;
+            //super();
+            this.month_inRenderer = month_inRenderer;
+            this.year_inRenderer = year_inRenderer;
+        }
+    
+        
+        
+        public void setFirst_Current_Day(JTable table){
+            for (int k = 0; k < table.getRowCount(); k++) {
+                for (int j = 0; j < table.getColumnCount(); j++) {
+                  if(table.getValueAt(k,j) != null){  
+                        int int_atCell = Integer.parseInt(table.getValueAt(k, j).toString());
+                        if(int_atCell == 1){
+                            this.f_row = k;
+                            this.f_column = j;     
+                        }if(int_atCell == current_day){
+                            this.c_row = k;
+                            this.c_column = j;
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) { 
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            JComponent jc = (JComponent)c;
+            Object value_present = table.getValueAt(row, column);
+            Object value_in_table = CalendarPage.model.getValueAt(row, column);   
 
-            if(column == 4 && row == 4){
-               c.setBackground(Color.LIGHT_GRAY); 
-            }else {
-                c.setBackground(Color.pink); // or a default background color
-    }
-             
+            setFirst_Current_Day(table); 
 
-    return c; 
-} 
-    
-//    @Override
-//    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-//        
-//        Component c = RENDERER.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//        Color color = null;
-//        for (int k = 0; k < table.getRowCount(); k++) {
-//            for (int j = 0; j < table.getColumnCount(); j++) {
-//              if(table.getValueAt(k,j) != null){  
-//                    Object result = table.getModel().getValueAt(k, j);
-//                    double number = Double.parseDouble(result.toString());
-//                    if(number == 1){
-//                        color = Color.RED;  
+            //case1:firstday of month  
+            if (this.f_row == row && this.f_column == column) {
+                c.setBackground(new Color (255, 128, 225));
+                jc.setBorder( new MatteBorder(2, 2, 2, 2, new Color(255, 51, 207)) );
+                c.setForeground(Color.BLACK);
+                
+                // if firstday is current day
+                if(this.select_cell_column == column && this.select_cell_row == row 
+                    &&CalendarPage.selected_month == CalendarPage.change_month &&
+                    CalendarPage.selected_year == CalendarPage.change_year){
+                    c.setBackground(currentDay_Color);
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    c.setForeground(Color.BLACK);
+                }
+                
+                // if day is sunday
+                if(column == 6){
+                        c.setForeground(Color.RED);
+                    }
+            //case2: for current day of calendar
+            }else if(this.c_row == row &&
+                    this.c_column == column &&
+                    this.current_year == this.year_inRenderer &&
+                    this.current_month == this.month_inRenderer) {
+                    c.setBackground(currentDay_Color);
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    c.setBackground(myColor);
+                    jc.setBorder(new MatteBorder(-1, -1, -1, -1,Color.BLACK) );
+                    c.setForeground(Color.BLUE);
+                    
+                    if(this.select_cell_column == column && this.select_cell_row == row ){
+                    c.setBackground(currentDay_Color);
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    c.setForeground(Color.BLUE);
+                    }
+                    
+//                    if(column == 6){
+//                        c.setForeground(Color.RED);
 //                        
 //                    }
-//                }
-//            }
-//        }    
-//        return c;
-//    }
+
+                }
+            
+            // if day is sunday
+            else if(column == 6 ){
+                c.setBackground(myColor);
+                jc.setBorder(new MatteBorder(-1, -1, -1, -1,Color.BLACK) );
+                c.setForeground(Color.RED);
+                if(this.select_cell_column == column && this.select_cell_row == row ){
+                    c.setBackground(currentDay_Color);
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    c.setForeground(Color.RED);
+                }
+            }    
+                
+             // if one day is selected
+            else {
+                c.setBackground(myColor);
+                jc.setBorder(new MatteBorder(-1, -1, -1, -1,Color.BLACK) );
+                c.setForeground(Color.BLACK);
+               
+                if(this.select_cell_column == column && this.select_cell_row == row
+                   &&CalendarPage.selected_month == CalendarPage.change_month &&
+                    CalendarPage.selected_year == CalendarPage.change_year){
+                    c.setBackground(currentDay_Color);
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    c.setForeground(Color.BLACK);
+                } 
+            }
+                return c;
+        } 
+
 }
