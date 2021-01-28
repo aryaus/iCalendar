@@ -383,7 +383,7 @@ public class Event extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
-    public void 
+ 
     
     /**
      * @param args the command line arguments
