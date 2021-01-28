@@ -30,7 +30,7 @@ public class AdminPage extends javax.swing.JFrame {
         show_Table(); // call this method to show the updated data in table
     }
     
-    public void show_Table(){
+    private void show_Table(){
         
         //Show Table
         int c;
@@ -209,6 +209,8 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
         jTable1.setShowGrid(true);
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);

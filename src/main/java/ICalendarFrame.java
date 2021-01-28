@@ -17,6 +17,8 @@ public class ICalendarFrame extends javax.swing.JFrame {
     /**
      * Creates new form ICalendarFrame
      */
+    
+    protected static int user_id;
     public ICalendarFrame() {
         initComponents();    
     }
@@ -223,6 +225,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
     }
     /* compare user input with data in database */
      private void logIn(String username, String password) {
+         
         Connection connection = DBconnection.connectToDatabase();
         if(connection != null){
             try {
@@ -231,11 +234,15 @@ public class ICalendarFrame extends javax.swing.JFrame {
                 pstmt.setString(1,username);
                 pstmt.setString(2,password);
                 ResultSet rs= pstmt.executeQuery();
+
                 if(rs.next()){
-                    //display Event
+                    
+                    ICalendarFrame.user_id = rs.getInt("ID");
+
+                    //display Userprofile
                     dispose();
-                    CalendarPage calendarPage = new CalendarPage();
-                    calendarPage.setVisible(true);
+                    UserProfile userprofile = new UserProfile();
+                    userprofile.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(this, "Username and Password do not match","ERROR",JOptionPane.ERROR_MESSAGE);
                 }

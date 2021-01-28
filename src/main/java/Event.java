@@ -79,6 +79,11 @@ public class Event extends javax.swing.JFrame {
         jbtnBack.setBackground(new java.awt.Color(255, 255, 255));
         jbtnBack.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnBack.setText("Back");
+        jbtnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBackActionPerformed(evt);
+            }
+        });
 
         jbtnAdd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnAdd.setText("+");
@@ -385,6 +390,14 @@ public class Event extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnSaveActionPerformed
+
+    private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
+        // TODO add your handling code here:
+        CalendarPage cal = new CalendarPage();
+        this.dispose();
+        cal.setVisible(true);
+        
+    }//GEN-LAST:event_jbtnBackActionPerformed
 
     /**
      * @param args the command line arguments
