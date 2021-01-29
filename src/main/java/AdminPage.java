@@ -86,8 +86,9 @@ public class AdminPage extends javax.swing.JFrame {
         jpButton = new javax.swing.JPanel();
         jbtnUpdate = new javax.swing.JButton();
         jbtnReset = new javax.swing.JButton();
-        jbtnDelete = new javax.swing.JButton();
         jbtnExit = new javax.swing.JButton();
+        jbtnLogout = new javax.swing.JButton();
+        jbtnDelete = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -108,6 +109,7 @@ public class AdminPage extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 0, 255));
 
         jpAdminPage.setBackground(new java.awt.Color(204, 255, 255));
+        jpAdminPage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153), 4));
 
         jpButton.setBackground(new java.awt.Color(204, 255, 255));
         jpButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153), 4));
@@ -115,6 +117,7 @@ public class AdminPage extends javax.swing.JFrame {
         jbtnUpdate.setBackground(new java.awt.Color(255, 255, 255));
         jbtnUpdate.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnUpdate.setText("Update");
+        jbtnUpdate.setBorderPainted(false);
         jbtnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbtnUpdateMouseClicked(evt);
@@ -129,27 +132,46 @@ public class AdminPage extends javax.swing.JFrame {
         jbtnReset.setBackground(new java.awt.Color(255, 255, 255));
         jbtnReset.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnReset.setText("Reset");
+        jbtnReset.setBorderPainted(false);
         jbtnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnResetActionPerformed(evt);
             }
         });
 
-        jbtnDelete.setBackground(new java.awt.Color(255, 255, 255));
-        jbtnDelete.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jbtnDelete.setText("Delete");
-        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnDeleteActionPerformed(evt);
-            }
-        });
-
         jbtnExit.setBackground(new java.awt.Color(255, 255, 255));
         jbtnExit.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnExit.setText("Exit");
+        jbtnExit.setBorderPainted(false);
+        jbtnExit.setMaximumSize(new java.awt.Dimension(61, 35));
+        jbtnExit.setMinimumSize(new java.awt.Dimension(61, 35));
         jbtnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnExitActionPerformed(evt);
+            }
+        });
+
+        jbtnLogout.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnLogout.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jbtnLogout.setText("Logout");
+        jbtnLogout.setBorderPainted(false);
+        jbtnLogout.setMaximumSize(new java.awt.Dimension(83, 35));
+        jbtnLogout.setMinimumSize(new java.awt.Dimension(83, 35));
+        jbtnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLogoutActionPerformed(evt);
+            }
+        });
+
+        jbtnDelete.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnDelete.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jbtnDelete.setText("Delete");
+        jbtnDelete.setBorderPainted(false);
+        jbtnDelete.setMaximumSize(new java.awt.Dimension(83, 35));
+        jbtnDelete.setMinimumSize(new java.awt.Dimension(83, 35));
+        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDeleteActionPerformed(evt);
             }
         });
 
@@ -160,24 +182,27 @@ public class AdminPage extends javax.swing.JFrame {
             .addGroup(jpButtonLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jpButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jpButtonLayout.setVerticalGroup(
             jpButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpButtonLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jbtnReset)
-                .addGap(32, 32, 32)
-                .addComponent(jbtnUpdate)
-                .addGap(35, 35, 35)
-                .addComponent(jbtnDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtnExit)
-                .addGap(35, 35, 35))
+                .addGap(25, 25, 25)
+                .addComponent(jbtnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jbtnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -220,11 +245,11 @@ public class AdminPage extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
@@ -313,36 +338,33 @@ public class AdminPage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtxtLastName))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jlFirstName)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtxtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtxtEmail))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jlUserName)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtxtUserName)))
-                        .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jlID)
                         .addGap(76, 76, 76)
-                        .addComponent(jtxtID)
-                        .addGap(18, 18, 18))))
+                        .addComponent(jtxtID))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtxtLastName))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jlFirstName)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtxtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtxtEmail))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jlUserName)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtxtUserName)))
+                .addContainerGap(411, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -355,10 +377,10 @@ public class AdminPage extends javax.swing.JFrame {
                     .addComponent(jlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -382,27 +404,32 @@ public class AdminPage extends javax.swing.JFrame {
         jpAdminPageLayout.setVerticalGroup(
             jpAdminPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpAdminPageLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addGroup(jpAdminPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpAdminPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jpAdminPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpAdminPage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpAdminPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
@@ -479,7 +506,6 @@ public class AdminPage extends javax.swing.JFrame {
 
         if(connection != null){
             try {
-
 
                 String Firstname = jtxtFirstName.getText();
                 String Lastname = jtxtLastName.getText();
@@ -577,6 +603,13 @@ public class AdminPage extends javax.swing.JFrame {
         jtxtID.setText(RecordTable.getValueAt(selectedIndex, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jbtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLogoutActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        ICalendarFrame cal = new ICalendarFrame();
+        cal.setVisible(true);
+    }//GEN-LAST:event_jbtnLogoutActionPerformed
+
     private JFrame frame;
     /**
      * @param args the command line arguments
@@ -620,6 +653,7 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnExit;
+    private javax.swing.JButton jbtnLogout;
     private javax.swing.JButton jbtnReset;
     private javax.swing.JButton jbtnUpdate;
     private javax.swing.JLabel jlEmail;
