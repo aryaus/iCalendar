@@ -11,11 +11,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +51,8 @@ public final class CalendarPage extends javax.swing.JFrame {
     public static int change_day = 0;
     
     
+    
+    
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
     int current_day = calendar.get(Calendar.DATE);
     
@@ -49,8 +61,48 @@ public final class CalendarPage extends javax.swing.JFrame {
     /**
      * Creates new form CalendarPage
      */
+  public void show_Table(){
+        
+        //Show Table
+        int c;
+        Connection connection = DBconnection.connectToDatabase();
+        DefaultTableModel RecordTable = (DefaultTableModel)jTableEvent.getModel();
+        //int SelectedRows = jTable1.getSelectedRow();
+        
+        if(connection != null){
+            try {
+                
+                 
+                Statement st = connection.createStatement();
+                ResultSet rs = st.executeQuery("select * from events");
+                ResultSetMetaData Rsmd = rs.getMetaData();
+                c = Rsmd.getColumnCount();
+                RecordTable.setRowCount(0);
+                
+                while(rs.next()){
+                    //Data will be added until finish
+                    Vector v = new Vector();
+                    for(int j= 1; j<= c; j++){
+                        
+                        v.add(rs.getString("eventName"));
+                        v.add(rs.getString("eventDate"));
+                
+                    }
+                    
+                    RecordTable.addRow(v);
+                   
+                }  
+                connection.close();
+            }catch (SQLException ex){
+                Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            System.out.println("NO DATABASE CONNECTION!");
+        }
+    }
     public CalendarPage() {
         initComponents();
+        show_Table();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Swing Calandar");
         
@@ -213,8 +265,9 @@ public final class CalendarPage extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         Add_Event = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableEvent = new javax.swing.JTable();
+        jbtnChange = new javax.swing.JButton();
         jbtnBack = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
@@ -367,7 +420,7 @@ public final class CalendarPage extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jMonthChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jYearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbtnCurrentDay)
@@ -401,10 +454,33 @@ public final class CalendarPage extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jScrollPane2.setViewportView(jTextArea1);
+        jTableEvent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTableEvent);
+
+        jbtnChange.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnChange.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jbtnChange.setText("Change");
+        jbtnChange.setBorderPainted(false);
+        jbtnChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnChangeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -412,15 +488,18 @@ public final class CalendarPage extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Add_Event, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 286, Short.MAX_VALUE))))
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Add_Event, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(jbtnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,8 +508,10 @@ public final class CalendarPage extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Add_Event, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -456,8 +537,8 @@ public final class CalendarPage extends javax.swing.JFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(162, 162, 162)
@@ -554,6 +635,14 @@ public final class CalendarPage extends javax.swing.JFrame {
         cal.setVisible(true);
     }//GEN-LAST:event_Add_EventActionPerformed
 
+    private void jbtnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnChangeActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+        EventChange cal = new EventChange();
+        cal.setVisible(true);
+    }//GEN-LAST:event_jbtnChangeActionPerformed
+
     private void jMonthChooser1PropertyChange(java.beans.PropertyChangeEvent evt){
         
           int i;
@@ -619,7 +708,9 @@ public final class CalendarPage extends javax.swing.JFrame {
                     }
                 }
         }
+        
     }
+    
     
     
     public static void main(String args[]) {
@@ -665,14 +756,15 @@ public final class CalendarPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable jTableEvent;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane1;
     private com.toedter.calendar.JYearChooser jYearChooser;
     private javax.swing.JButton jbtnBack;
+    private javax.swing.JButton jbtnChange;
     private javax.swing.JButton jbtnCurrentDay;
     private javax.swing.JButton logoutBtn;
     // End of variables declaration//GEN-END:variables

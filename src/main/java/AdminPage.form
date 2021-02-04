@@ -283,7 +283,7 @@
                         <Column editable="false" title="Lastname" type="java.lang.String"/>
                         <Column editable="false" title="Email" type="java.lang.String"/>
                         <Column editable="false" title="Username" type="java.lang.Object"/>
-                        <Column editable="true" title="ID" type="java.lang.Object"/>
+                        <Column editable="false" title="ID" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="showGrid" type="boolean" value="true"/>

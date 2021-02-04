@@ -15,6 +15,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
+import java.text.SimpleDateFormat;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -86,6 +87,11 @@ public class Event extends javax.swing.JFrame {
         jbtnBack.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnBack.setText("Back");
         jbtnBack.setBorderPainted(false);
+        jbtnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBackActionPerformed(evt);
+            }
+        });
 
         jbtnAdd.setBackground(new java.awt.Color(255, 255, 255));
         jbtnAdd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
@@ -148,6 +154,11 @@ public class Event extends javax.swing.JFrame {
 
         reminderComboBox.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         reminderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 week", "3 days", "1 hour", "10 minutes" }));
+        reminderComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reminderComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -373,19 +384,23 @@ public class Event extends javax.swing.JFrame {
             try {
                 
                 PreparedStatement pstmt = (PreparedStatement)
-                connection.prepareStatement("insert into events(eventId,eventName,eventDate ,duration,location,participants"
-                           + ",priority,reminder) values(?,?,?,?,?,?,?,?");
+                connection.prepareStatement("insert into events(eventName,eventDate ,duration,location,participants"
+                           + ",priority,reminder, UserID) values(?,?,?,?,?,?,?,?)");
                 
                 pstmt.setString(1,jtxtEventName.getText());
-                pstmt.setDate(2,(Date)jDateChooseriDate.getDate());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String date = sdf.format(jDateChooseriDate.getDate());
+                pstmt.setString(2,date);
                 pstmt.setString(3,jtxtDuration.getText());
                 pstmt.setString(4,jtxtLocation.getText());
                 pstmt.setString(5,jtxtParticipant.getText());
-                pstmt.setString(5,priorityComboBox.getSelectedItem().toString());
-                pstmt.setString(5,reminderComboBox.getSelectedItem().toString());
-                
+                pstmt.setString(6,priorityComboBox.getSelectedItem().toString());
+                pstmt.setString(7,reminderComboBox.getSelectedItem().toString());
+                pstmt.setInt(8, ICalendarFrame.user_id);
+
+               
                 int rs= pstmt.executeUpdate(); 
-                JOptionPane.showMessageDialog(this, "Event added successfully","DONE",JOptionPane.INFORMATION_MESSAGE);  
+                JOptionPane.showMessageDialog(this, "Event added successfully","DONE",JOptionPane.INFORMATION_MESSAGE); 
                 this.dispose();
                 CalendarPage cal = new CalendarPage();
                 cal.setVisible(true);
@@ -402,6 +417,18 @@ public class Event extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnSaveActionPerformed
+
+    private void reminderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reminderComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reminderComboBoxActionPerformed
+
+    private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        CalendarPage call = new CalendarPage();
+        call.setVisible(true);
+        
+    }//GEN-LAST:event_jbtnBackActionPerformed
 
     public static void sendMail(String recepient) throws MessagingException{
         

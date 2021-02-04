@@ -222,7 +222,7 @@ public class AdminPage extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -447,6 +447,7 @@ public class AdminPage extends javax.swing.JFrame {
         
         DefaultTableModel RecordTable = (DefaultTableModel)jTable1.getModel();
         int selectedIndex = jTable1.getSelectedRow();
+        
 
         Connection connection = DBconnection.connectToDatabase();
 

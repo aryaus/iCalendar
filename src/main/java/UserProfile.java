@@ -281,11 +281,11 @@ public class UserProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtFirstNameActionPerformed
 
     private void jbtnMyCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMyCalendarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
         
         dispose();        
-        CalendarPage calendarPage = new CalendarPage();
-        calendarPage.setVisible(true);
+        CalendarPage call = new CalendarPage();
+        call.setVisible(true);
     }//GEN-LAST:event_jbtnMyCalendarActionPerformed
 
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
