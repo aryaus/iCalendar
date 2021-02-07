@@ -85,12 +85,11 @@ public class UserProfile extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Profile");
 
-        jPanel1.setBackground(new java.awt.Color(250, 228, 250));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 204), 4));
-        jPanel1.setForeground(new java.awt.Color(250, 228, 250));
+        jPanel1.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 230, 230), 4));
 
-        jPanel2.setBackground(new java.awt.Color(250, 228, 250));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 204), 4));
+        jPanel2.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jbtnMyCalendar.setBackground(new java.awt.Color(255, 255, 255));
         jbtnMyCalendar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
@@ -135,8 +134,8 @@ public class UserProfile extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jlPassword.setBackground(new java.awt.Color(250, 228, 250));
-        jlPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 204), 4));
+        jlPassword.setBackground(new java.awt.Color(230, 255, 255));
+        jlPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jlFirstName.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jlFirstName.setText("Firstname");
@@ -152,6 +151,8 @@ public class UserProfile extends javax.swing.JFrame {
                 jtxtFirstNameActionPerformed(evt);
             }
         });
+
+        jtxtPassword.setEditable(false);
 
         jlpass.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jlpass.setText("Password");
@@ -212,8 +213,8 @@ public class UserProfile extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel4.setBackground(new java.awt.Color(250, 228, 250));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 204), 4));
+        jPanel4.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jlUserName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo_2021-01-26_00-20-25.jpg"))); // NOI18N
 

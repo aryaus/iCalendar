@@ -131,11 +131,11 @@ public class EventChange extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Event");
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 4));
+        jPanel1.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 4));
+        jPanel2.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jbtnBack.setBackground(new java.awt.Color(255, 255, 255));
         jbtnBack.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
@@ -191,11 +191,11 @@ public class EventChange extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 4));
+        jPanel3.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
-        jPanel6.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 4));
+        jPanel6.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jtxtEventName.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jtxtEventName.setDoubleBuffered(true);
@@ -227,8 +227,8 @@ public class EventChange extends javax.swing.JFrame {
 
         jtxtParticipant.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 4));
+        jPanel4.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel6.setText("Reminder");

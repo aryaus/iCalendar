@@ -54,10 +54,10 @@ public class Registration extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registration");
 
-        jPanel1.setBackground(new java.awt.Color(224, 224, 249));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 4));
+        jPanel1.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
-        jPanel2.setBackground(new java.awt.Color(224, 224, 249));
+        jPanel2.setBackground(new java.awt.Color(230, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
@@ -80,8 +80,8 @@ public class Registration extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(224, 224, 249));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 4));
+        jPanel3.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel1.setText("First name");
@@ -175,8 +175,8 @@ public class Registration extends javax.swing.JFrame {
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(224, 224, 249));
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 255), 4));
+        jPanel4.setBackground(new java.awt.Color(230, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255), 4));
 
         jButton2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jButton2.setText("Back");
