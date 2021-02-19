@@ -1,4 +1,6 @@
 
+import static com.mysql.cj.conf.PropertyKey.logger;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,6 +18,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.text.SimpleDateFormat;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -52,7 +60,6 @@ public class Event extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jbtnBack = new javax.swing.JButton();
-        jbtnAdd = new javax.swing.JButton();
         jbtnSave = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -93,11 +100,6 @@ public class Event extends javax.swing.JFrame {
             }
         });
 
-        jbtnAdd.setBackground(new java.awt.Color(255, 255, 255));
-        jbtnAdd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jbtnAdd.setText("+");
-        jbtnAdd.setBorderPainted(false);
-
         jbtnSave.setBackground(new java.awt.Color(255, 255, 255));
         jbtnSave.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnSave.setText("Save");
@@ -115,9 +117,7 @@ public class Event extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jbtnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(424, 424, 424)
-                .addComponent(jbtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -127,7 +127,6 @@ public class Event extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnBack)
-                    .addComponent(jbtnAdd)
                     .addComponent(jbtnSave))
                 .addGap(33, 33, 33))
         );
@@ -204,7 +203,7 @@ public class Event extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(509, 509, 509)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(533, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,46 +375,50 @@ public class Event extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtEventNameActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
- 
-        
-        Connection connection = DBconnection.connectToDatabase();
-  
-        if(connection != null){
-            try {
-                
-                PreparedStatement pstmt = (PreparedStatement)
-                connection.prepareStatement("insert into events(eventName,eventDate ,duration,location,participants"
-                           + ",priority,reminder, UserID) values(?,?,?,?,?,?,?,?)");
-                
-                pstmt.setString(1,jtxtEventName.getText());
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String date = sdf.format(jDateChooseriDate.getDate());
-                pstmt.setString(2,date);
-                pstmt.setString(3,jtxtDuration.getText());
-                pstmt.setString(4,jtxtLocation.getText());
-                pstmt.setString(5,jtxtParticipant.getText());
-                pstmt.setString(6,priorityComboBox.getSelectedItem().toString());
-                pstmt.setString(7,reminderComboBox.getSelectedItem().toString());
-                pstmt.setInt(8, ICalendarFrame.user_id);
-
-               
-                int rs= pstmt.executeUpdate(); 
-                JOptionPane.showMessageDialog(this, "Event added successfully","DONE",JOptionPane.INFORMATION_MESSAGE); 
-                this.dispose();
-                CalendarPage cal = new CalendarPage();
-                cal.setVisible(true);
-            } catch (SQLException ex) {
-                 JOptionPane.showMessageDialog(null,"Event Failed"+ex);
-            }
-        }else{
-                System.out.println("NO DATABASE CONNECTION!");
+   
+            String par = jtxtParticipant.getText();
+            
+            Connection connection = DBconnection.connectToDatabase();
+            
+            if(connection != null){
+                try {
+                    
+                    PreparedStatement pstmt = (PreparedStatement)
+                            connection.prepareStatement("insert into events(eventName,eventDate ,duration,location,participants"
+                                    + ",priority,reminder, UserID) values(?,?,?,?,?,?,?,?)");
+                    
+                    pstmt.setString(1,jtxtEventName.getText());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String date = sdf.format(jDateChooseriDate.getDate());
+                    pstmt.setString(2,date);
+                    pstmt.setString(3,jtxtDuration.getText());
+                    pstmt.setString(4,jtxtLocation.getText());
+                    pstmt.setString(5,jtxtParticipant.getText());
+                    pstmt.setString(6,priorityComboBox.getSelectedItem().toString());
+                    pstmt.setString(7,reminderComboBox.getSelectedItem().toString());
+                    pstmt.setInt(8, ICalendarFrame.user_id);
+                    
+                    
+                    
+                    int rs= pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Event added successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                    CalendarPage cal = new CalendarPage();
+                    cal.setVisible(true);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null,"Event Failed"+ex);
                 }
-        
-        
+            }else{
+                System.out.println("NO DATABASE CONNECTION!");
+            }
+            
+            
+            MailSender.sendMail(par);
+         
+            
+            
+             // TODO add your handling code here:
       
-        
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
     private void reminderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reminderComboBoxActionPerformed
@@ -430,44 +433,7 @@ public class Event extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbtnBackActionPerformed
 
-    public static void sendMail(String recepient) throws MessagingException{
-        
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smpt.gmail.com");
-        props.put("mail.smtp.port", 465);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        
-        String _mailAddress = "xxxxxx@gmail.com";
-        String _pass = "xxxxxxxx";
-        Session session;
-        session = Session.getInstance(props, new Authenticator(){
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication(){
-                return new PasswordAuthentication(_mailAddress , _pass);
-            }
-                    });
-        Message message = prepareMessage(session , _mailAddress, recepient);
-        
-        Transport.send(message);
-        
-        }
-    
-    
-    private static Message prepareMessage(Session session, String _mailAddress, String recepient){
-        try{
-        Message message = new MimeMessage(session);  
-        message.setFrom(new InternetAddress(_mailAddress));
-        message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-        message.setSubject("Event");
-        message.setText("This is an event");
-        } catch(Exception ex){
-            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-         
-    }
- 
+   
     
     /**
      * @param args the command line arguments
@@ -515,7 +481,6 @@ public class Event extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JButton jbtnAdd;
     private javax.swing.JButton jbtnBack;
     private javax.swing.JButton jbtnSave;
     private javax.swing.JLabel jlDate;

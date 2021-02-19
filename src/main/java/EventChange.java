@@ -1,4 +1,6 @@
 
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -22,6 +24,9 @@ import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import java.io.FileOutputStream;
+import com.lowagie.text.pdf.*;
+import java.io.FileNotFoundException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -106,6 +111,7 @@ public class EventChange extends javax.swing.JFrame {
         jbtnBack = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
         jbtnEdit1 = new javax.swing.JButton();
+        exportPdfBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jtxtEventName = new javax.swing.JTextField();
@@ -167,6 +173,13 @@ public class EventChange extends javax.swing.JFrame {
             }
         });
 
+        exportPdfBtn.setText("Export PDF");
+        exportPdfBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportPdfBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -175,6 +188,8 @@ public class EventChange extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jbtnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exportPdfBtn)
+                .addGap(54, 54, 54)
                 .addComponent(jbtnEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jbtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,7 +202,8 @@ public class EventChange extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnDelete)
                     .addComponent(jbtnEdit1)
-                    .addComponent(jbtnBack))
+                    .addComponent(jbtnBack)
+                    .addComponent(exportPdfBtn))
                 .addGap(33, 33, 33))
         );
 
@@ -577,6 +593,78 @@ public class EventChange extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTableEventMouseClicked
 
+    private void exportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportPdfBtnActionPerformed
+        
+              
+        String path="";
+        JFileChooser file= new JFileChooser();
+        file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x=file.showSaveDialog(this);
+        
+        if(x == JFileChooser.APPROVE_OPTION){
+            path = file.getSelectedFile().getPath();
+        }
+        
+        Document doc= new Document();
+        
+          try {
+              PdfWriter.getInstance(doc, new FileOutputStream(path+"events.pdf"));
+              
+              doc.open();
+              
+              PdfPTable tbl = new PdfPTable(8);
+              
+              // adding header
+              tbl.addCell("Name");
+              tbl.addCell("Date");
+              tbl.addCell("Duration");
+              tbl.addCell("Location");
+              tbl.addCell("Participants");
+              tbl.addCell("Priority");
+              tbl.addCell("Reminder");
+              tbl.addCell("Event ID");
+              
+              for(int i= 0; i < jTableEvent.getRowCount(); i++){
+                  
+        String name = jTableEvent.getValueAt(i, 0).toString();
+        String date = jTableEvent.getValueAt(i, 1).toString();
+        String duration = jTableEvent.getValueAt(i, 2).toString();
+        String location = jTableEvent.getValueAt(i, 3).toString();
+        String participant = jTableEvent.getValueAt(i, 4).toString();
+        String priority = jTableEvent.getValueAt(i, 5).toString();
+        String reminder = jTableEvent.getValueAt(i, 6).toString();
+        String id = jTableEvent.getValueAt(i, 7).toString();
+        
+        
+        tbl.addCell(name);
+        tbl.addCell(date);
+        tbl.addCell(duration);
+        tbl.addCell(location);
+        tbl.addCell(participant);
+        tbl.addCell(priority);
+        tbl.addCell(reminder);
+        tbl.addCell(id);
+        
+                  
+              }
+              
+              doc.add(tbl);           
+              
+              
+              
+          } catch (FileNotFoundException ex) {
+              Logger.getLogger(EventChange.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (DocumentException ex) {
+              Logger.getLogger(EventChange.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
+          doc.close();
+        
+              
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exportPdfBtnActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -614,6 +702,7 @@ public class EventChange extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exportPdfBtn;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
