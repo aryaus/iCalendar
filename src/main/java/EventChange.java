@@ -62,9 +62,9 @@ public class EventChange extends javax.swing.JFrame {
         if(connection != null){
             try {
                 
-                 
+                int id = ICalendarFrame.user_id;
                 Statement st = connection.createStatement();
-                ResultSet rs = st.executeQuery("select * from events");
+                ResultSet rs = st.executeQuery("select * from events where UserID= '" +id+ "' ");
                 ResultSetMetaData Rsmd = rs.getMetaData();
                 c = Rsmd.getColumnCount();
                 RecordTable.setRowCount(0);

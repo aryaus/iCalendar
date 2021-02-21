@@ -38,12 +38,12 @@ public class MailSender {
         Connection con = DBconnection.connectToDatabase();
         int id = ICalendarFrame.user_id;
         PreparedStatement pstmt = (PreparedStatement)
-        con.prepareStatement("SELECT events.eventName, events.eventDate, events.location, users.fname, users.lname FROM events, users where UserID =  '" + id + "'");
+        con.prepareStatement("SELECT events.eventName, events.eventDate,events.eventTime, events.location, users.fname, users.lname FROM events, users where UserID =  '" + id + "'");
         ResultSet rs = pstmt.executeQuery();
         try {
             while (rs.next()) {
        
-                msg= "Information! \nYou are going to have a(n) " + rs.getString("eventName") + ", on " + rs.getString("eventDate") + ", in " +  rs.getString("location")+ ", with " +rs.getString("fname")+" " +rs.getString("lname");
+                msg= "Information! \nYou are going to have a(n) " + rs.getString("eventName") + ", on " + rs.getString("eventDate") + ",at "+rs.getString("eventTime")+ " in " +  rs.getString("location")+ ", with " +rs.getString("fname")+" " +rs.getString("lname");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,13 +58,13 @@ public class MailSender {
         Connection con = DBconnection.connectToDatabase();
         int id = ICalendarFrame.user_id;
         PreparedStatement pstmt = (PreparedStatement)
-        con.prepareStatement("SELECT eventName, eventDate, location, reminder FROM events where UserID =  '" + id + "'");
+        con.prepareStatement("SELECT eventName, eventDate,eventTime, location, reminder FROM events where UserID =  '" + id + "'");
 
         ResultSet rs = pstmt.executeQuery();
    
         try {
             while (rs.next()) {
-                msg= "Reminder! \nYour appointment , " + rs.getString("eventName") + ", will take place on " + rs.getString("eventDate") + ", in " +  rs.getString("location")+ ", it will start in " +rs.getString("reminder")+".";
+                msg= "Reminder! \nYour appointment , " + rs.getString("eventName") + ", will take place on " + rs.getString("eventDate") + ", in " +  rs.getString("location")+ ", it will start in " +rs.getString("reminder")+" at " +rs.getString("eventTime")+" .";
             }
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
