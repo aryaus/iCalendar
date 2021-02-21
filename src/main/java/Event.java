@@ -413,11 +413,15 @@ public class Event extends javax.swing.JFrame {
             }
             
             
+        try {
             MailSender.sendMail(par);
-         
             
             
-             // TODO add your handling code here:
+            
+            // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
