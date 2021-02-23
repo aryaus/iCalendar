@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +34,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import static javax.swing.UIManager.getString;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -402,16 +405,23 @@ public class Event extends javax.swing.JFrame {
     private void jtxtEventNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtEventNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtEventNameActionPerformed
-
+/**
+ * this method save all the inputs in events table in database, if you press save button
+ * @param evt 
+ */
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
    
             String par = jtxtParticipant.getText();
-            
+            String Email = "";
             Connection connection = DBconnection.connectToDatabase();
-            
+            int id = ICalendarFrame.user_id;
             if(connection != null){
                 try {
-                    
+                    PreparedStatement pst = (PreparedStatement)
+                            connection.prepareStatement("select email from users where ID = '"+id+"'");
+                    ResultSet rst = pst.executeQuery();
+                    rst.next();
+                    Email = rst.getString("email");
                     PreparedStatement pstmt = (PreparedStatement)
                             connection.prepareStatement("insert into events(eventName,eventDate, eventTime ,duration,location,participants"
                                     + ",priority,reminder, UserID) values(?,?,?,?,?,?,?,?,?)");
@@ -449,6 +459,7 @@ public class Event extends javax.swing.JFrame {
             
         try {
             MailSender.sendMail(par);
+            MailSender.sendReminder(Email);
             
             
             
@@ -462,7 +473,10 @@ public class Event extends javax.swing.JFrame {
     private void reminderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reminderComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reminderComboBoxActionPerformed
-
+/**
+ *  if user press the back button, CalendarPage is opened
+ * @param evt 
+ */
     private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
         // TODO add your handling code here:
         this.dispose();

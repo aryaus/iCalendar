@@ -29,14 +29,14 @@ public class AdminPage extends javax.swing.JFrame {
         initComponents();
         show_Table(); // call this method to show the updated data in table
     }
-    
+    /**
+     * get all User data from database, and shows them in jTable1
+     */
     public void show_Table(){
         
-        //Show Table
         int c;
         Connection connection = DBconnection.connectToDatabase();
         DefaultTableModel RecordTable = (DefaultTableModel)jTable1.getModel();
-        //int SelectedRows = jTable1.getSelectedRow();
         
         if(connection != null){
             try {
@@ -431,17 +431,23 @@ public class AdminPage extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * if you press the Exit button, the program closes
+ * @param evt 
+ */
     private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
         // TODO : Exit
         frame = new JFrame("Exit");
-        if(JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit", "MYSQL Connector", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION)
+        if(JOptionPane.showConfirmDialog(frame, "Are you sure to exit?", "Confirm Exit", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION)
         {
             System.exit(0);
         }
 
     }//GEN-LAST:event_jbtnExitActionPerformed
-
+/**
+ *  if you press delete button, the selected user from jTable1 is deleted
+ * @param evt 
+ */
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
         // TODO add your handling code here:
         
@@ -486,9 +492,12 @@ public class AdminPage extends javax.swing.JFrame {
             System.out.println("NO DATABASE CONNECTION!");
         }
     }//GEN-LAST:event_jbtnDeleteActionPerformed
-
+/**
+ *  if you press reset button, all jTextFields are cleared
+ * @param evt 
+ */
     private void jbtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnResetActionPerformed
-        // TODO: Reset
+        // TODO:
 
         jtxtID.setText("");
         jtxtFirstName.setText("");
@@ -497,11 +506,13 @@ public class AdminPage extends javax.swing.JFrame {
         jtxtUserName.setText("");
 
     }//GEN-LAST:event_jbtnResetActionPerformed
-
+/**
+ * you can select a user and update/edit users data
+ *  if you press update button, the given data are saved and displayed in jTable1
+ * @param evt 
+ */
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
 
-       // DefaultTableModel RecordTable = (DefaultTableModel)jTable1.getModel();
-       // int selectedIndex = jTable1.getSelectedRow();
 
         Connection connection = DBconnection.connectToDatabase();
 
@@ -513,9 +524,13 @@ public class AdminPage extends javax.swing.JFrame {
                 String Email = jtxtEmail.getText();
                 String Username = jtxtUserName.getText();
                 String id = jtxtID.getText();
-
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery("select * from users where uname='"+Username+"'");
+                if(rs.next()){
+                JOptionPane.showMessageDialog(null, "This Username already exists. Please pick another Username","ERROR",JOptionPane.ERROR_MESSAGE);
+                }else{
                 PreparedStatement update = connection.prepareStatement("update users set fname = ?,lname = ?,email = ?,uname = ? where id = ?");
-
+                
                 update.setString(1,Firstname);
                 update.setString(2,Lastname);
                 update.setString(3,Email);
@@ -523,7 +538,7 @@ public class AdminPage extends javax.swing.JFrame {
                 update.setInt(5,Integer.parseInt(id));
 
                 int i= update.executeUpdate();
-
+                
                 if(i >=1){
                     
                     JOptionPane.showMessageDialog(null,"Information has been Updated!");
@@ -535,11 +550,11 @@ public class AdminPage extends javax.swing.JFrame {
                     jtxtEmail.setText("");
                     jtxtUserName.setText("");
                     jtxtFirstName.requestFocus();
-
+                
                 }else{
                     JOptionPane.showMessageDialog(null,"Update failed!");
                 }
-
+                }
             } catch (SQLException ex){
                 Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -591,7 +606,10 @@ public class AdminPage extends javax.swing.JFrame {
     private void jtxtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtUserNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtUserNameActionPerformed
-
+/**
+ *  the data of selected User in jTable1 is displayed in respective jTextFields
+ * @param evt 
+ */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         DefaultTableModel RecordTable = (DefaultTableModel)jTable1.getModel();
@@ -603,7 +621,10 @@ public class AdminPage extends javax.swing.JFrame {
         jtxtUserName.setText(RecordTable.getValueAt(selectedIndex, 3).toString());
         jtxtID.setText(RecordTable.getValueAt(selectedIndex, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
-
+/**
+ *  if admin press the logout button, ICalenderFrame is opened
+ * @param evt 
+ */
     private void jbtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLogoutActionPerformed
         // TODO add your handling code here:
         this.dispose();

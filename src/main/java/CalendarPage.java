@@ -61,13 +61,16 @@ public final class CalendarPage extends javax.swing.JFrame {
     /**
      * Creates new form CalendarPage
      */
+    
+/**
+ * this method gets all events of User from database and displays them as a jTable1
+ * @param evt 
+ */
   public void show_Table(){
         
-        //Show Table
         int c;
         Connection connection = DBconnection.connectToDatabase();
         DefaultTableModel RecordTable = (DefaultTableModel)jTableEvent.getModel();
-        //int SelectedRows = jTable1.getSelectedRow();
         
         if(connection != null){
             try {
@@ -456,14 +459,14 @@ public final class CalendarPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Date"
+                "Name", "Date", "Priority"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -615,28 +618,40 @@ public final class CalendarPage extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
     }//GEN-LAST:event_jTable1MouseClicked
-
+/**
+ *  if user press the logout button, ICalenderFrame is opened
+ * @param evt 
+ */
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         this.dispose();
         ICalendarFrame cal = new ICalendarFrame();
         cal.setVisible(true);
         
     }//GEN-LAST:event_logoutBtnActionPerformed
-
+/**
+ *  if user press the back button, UserProfile is opened
+ * @param evt 
+ */
     private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
         // TODO add your handling code here:
         this.dispose();
         UserProfile cal = new UserProfile();
         cal.setVisible(true);
     }//GEN-LAST:event_jbtnBackActionPerformed
-
+/**
+ *  if user want to add a new event, he should press the Add_Event "+" button.
+ * @param evt 
+ */
     private void Add_EventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_EventActionPerformed
         // TODO add your handling code here:
         this.dispose();
         Event cal = new Event();
         cal.setVisible(true);
     }//GEN-LAST:event_Add_EventActionPerformed
-
+/**
+ *  if user want to edit/update event's data, user should press change button
+ * @param evt 
+ */
     private void jbtnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnChangeActionPerformed
         // TODO add your handling code here:
         

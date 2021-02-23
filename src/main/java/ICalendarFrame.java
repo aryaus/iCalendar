@@ -210,7 +210,10 @@ public class ICalendarFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-   /* check the login Input */
+   /**
+    * 
+    * check the login Input, check if user or admin want to login
+    */
     public void checkUser(){
         String username =jtxtUsername.getText();
         String password=String.valueOf(jtxtPassword.getText());
@@ -226,7 +229,9 @@ public class ICalendarFrame extends javax.swing.JFrame {
             logIn(username,password);
         }
     }
-    /* compare user input with data in database */
+    /**
+     * compare user input with data in database,
+     */
      private void logIn(String username, String password) {
         Connection connection = DBconnection.connectToDatabase();
         if(connection != null){
@@ -239,7 +244,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
                 _user = username;
                 _password = password;
                 if(rs.next()){
-                    ICalendarFrame.user_id = rs.getInt("ID");;
+                    ICalendarFrame.user_id = rs.getInt("ID");
                     //display User Profile
                     dispose();
                     UserProfile call = new UserProfile();
@@ -254,12 +259,18 @@ public class ICalendarFrame extends javax.swing.JFrame {
         }else{
                 System.out.println("NO DATABASE CONNECTION!");
                 }
-    }
+    }/**
+     * once you push the login button, the program calls the checkUser Method
+     * @param evt 
+     */
     private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
     // TODO add your handling code here:
        checkUser();
     }//GEN-LAST:event_jbtnLoginActionPerformed
-
+/**
+     * once you push the SignUp button, the program open the Registration window
+     * @param evt 
+     */
     private void jbtnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSignupActionPerformed
         // TODO add your handling code here:
         this.dispose();

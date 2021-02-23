@@ -32,7 +32,13 @@ import javax.mail.internet.MimeMessage;
  * @author ARYA
  */
 public class MailSender {
-    
+    /**
+     * this method gets data from database and and save data as String 
+     * Participant email Text
+     * @param s
+     * @return
+     * @throws SQLException 
+     */
         public static String getData(String s) throws SQLException {
         String msg ="";
         Connection con = DBconnection.connectToDatabase();
@@ -43,7 +49,7 @@ public class MailSender {
         try {
             while (rs.next()) {
        
-                msg= "Information! \nYou are going to have a(n) " + rs.getString("eventName") + ", on " + rs.getString("eventDate") + ",at "+rs.getString("eventTime")+ " in " +  rs.getString("location")+ ", with " +rs.getString("fname")+" " +rs.getString("lname");
+                msg= "Information! \nYou are going to have a(n) " + rs.getString("eventName") + " on " + rs.getString("eventDate") + "at "+rs.getString("eventTime")+ " in " +  rs.getString("location")+ ", with " +rs.getString("fname")+" " +rs.getString("lname");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,7 +57,13 @@ public class MailSender {
         return msg;
     }     
 
-
+/**
+ * this method gets data from database and and save data as String 
+ * Reminder Text
+ * @param s
+ * @return
+ * @throws SQLException 
+ */
 
     public static String getDataReminder(String s) throws SQLException {
         String msg ="";
@@ -61,10 +73,9 @@ public class MailSender {
         con.prepareStatement("SELECT eventName, eventDate,eventTime, location, reminder FROM events where UserID =  '" + id + "'");
 
         ResultSet rs = pstmt.executeQuery();
-   
         try {
             while (rs.next()) {
-                msg= "Reminder! \nYour appointment , " + rs.getString("eventName") + ", will take place on " + rs.getString("eventDate") + ", in " +  rs.getString("location")+ ", it will start in " +rs.getString("reminder")+" at " +rs.getString("eventTime")+" .";
+                msg= "Reminder! \nYour appointment , " + rs.getString("eventName") + ", will take place on " + rs.getString("eventDate") + " in " +  rs.getString("location")+ ", it will start in " +rs.getString("reminder")+" at " +rs.getString("eventTime")+" .";
             }
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +129,52 @@ public class MailSender {
         return message;
          
     }
- 
+     public static void sendReminder(String recepient) throws SQLException{
+        
+        try {
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+          
+            
+            String _mailAddress = "icalendarjavaproject@gmail.com";
+            String _pass = "Java2021!!";
+            Session session;
+            session = Session.getInstance(props, new Authenticator(){
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication(){
+                    return new PasswordAuthentication(_mailAddress , _pass);
+                }
+            });
+            Message message = prepareReminder(session , _mailAddress, recepient);
+            
+            Transport.send(message);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }
+    
+    
+    private static Message prepareReminder(Session session, String _mailAddress, String recepient) throws SQLException{
+       Message message = new MimeMessage(session);
+       String s="";
+        try{
+         
+        message.setFrom(new InternetAddress(_mailAddress));
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+        message.setSubject("Reminder");
+        String msg = getDataReminder(s);
+        message.setText(msg);
+        } catch(MessagingException ex){
+            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return message;
+         
+    }
+
     public void reminder(){
         
         TimerTask timer = new TimerTask() {

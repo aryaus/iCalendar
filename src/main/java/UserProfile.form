@@ -181,7 +181,6 @@
                           <Component id="jbtnUpdate" min="-2" pref="135" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jlpass" max="32767" attributes="0"/>
                                   <Component id="jlEmail" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jlLastName" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jlFirstName" alignment="1" pref="77" max="32767" attributes="0"/>
@@ -190,7 +189,6 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jtxtEmail" alignment="0" pref="350" max="32767" attributes="0"/>
                                   <Component id="jtxtLastName" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtxtPassword" max="32767" attributes="0"/>
                                   <Component id="jtxtFirstName" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -217,12 +215,7 @@
                           <Component id="jlEmail" min="-2" max="-2" attributes="0"/>
                           <Component id="jtxtEmail" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jtxtPassword" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="jlpass" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="178" max="32767" attributes="0"/>
+                      <EmptySpace pref="229" max="32767" attributes="0"/>
                       <Component id="jbtnUpdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -262,16 +255,6 @@
             <Component class="javax.swing.JTextField" name="jtxtLastName">
             </Component>
             <Component class="javax.swing.JTextField" name="jtxtEmail">
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jtxtPassword">
-            </Component>
-            <Component class="javax.swing.JLabel" name="jlpass">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri" size="18" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Password"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jbtnUpdate">
               <Properties>

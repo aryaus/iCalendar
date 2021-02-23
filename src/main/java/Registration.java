@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static java.lang.System.out;
 import java.util.regex.Pattern;
 /**
  *
@@ -268,7 +267,9 @@ public class Registration extends javax.swing.JFrame {
         ICalendarFrame login = new ICalendarFrame();
         login.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-/**Insert user data into database, check if Database connection exists */
+/**
+ * Insert user data into database, check if Database connection exists
+ */
     private void Registration(String fname, String lname, String email, String uname, String pass) {
        
         Connection connection = DBconnection.connectToDatabase();
@@ -308,7 +309,11 @@ public class Registration extends javax.swing.JFrame {
     private void jtxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtEmailActionPerformed
-
+/***
+ * the user should fill in the registration form,this method check user input
+ * check for duplicate and invalid input
+ * @param evt 
+ */
     private void jbtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRegisterActionPerformed
         // TODO add your handling code here:
         String fname = firstnameField.getText();

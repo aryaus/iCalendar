@@ -27,13 +27,15 @@ public class UserProfile extends javax.swing.JFrame {
         initComponents();
         show_profile();
     }
-    
+    /**
+     * this method gets all user data from database and display them in respective jTextFields
+     */
     private void show_profile() {
         Connection connection = DBconnection.connectToDatabase();
         try {
                 int id = ICalendarFrame.user_id;
                 PreparedStatement pstmt = (PreparedStatement)
-                connection.prepareStatement("select fname, lname, email, uname, pass from users where ID = ?");
+                connection.prepareStatement("select fname, lname, email, uname from users where ID = ?");
                 pstmt.setInt(1,id);
                 
                 ResultSet rs= pstmt.executeQuery();
@@ -48,8 +50,6 @@ public class UserProfile extends javax.swing.JFrame {
                     jtxtLastName.setText(lname); 
                     String email = rs.getString("email");
                     jtxtEmail.setText(email); 
-                    String pass = rs.getString("pass");
-                    jtxtPassword.setText(pass);
                 }
                 
             } catch (SQLException ex) {
@@ -76,8 +76,6 @@ public class UserProfile extends javax.swing.JFrame {
         jtxtFirstName = new javax.swing.JTextField();
         jtxtLastName = new javax.swing.JTextField();
         jtxtEmail = new javax.swing.JTextField();
-        jtxtPassword = new javax.swing.JPasswordField();
-        jlpass = new javax.swing.JLabel();
         jbtnUpdate = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jlUserName = new javax.swing.JLabel();
@@ -153,9 +151,6 @@ public class UserProfile extends javax.swing.JFrame {
             }
         });
 
-        jlpass.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jlpass.setText("Password");
-
         jbtnUpdate.setBackground(new java.awt.Color(255, 255, 255));
         jbtnUpdate.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jbtnUpdate.setText("Update");
@@ -176,7 +171,6 @@ public class UserProfile extends javax.swing.JFrame {
                     .addComponent(jbtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jlPasswordLayout.createSequentialGroup()
                         .addGroup(jlPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlpass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlFirstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
@@ -184,7 +178,6 @@ public class UserProfile extends javax.swing.JFrame {
                         .addGroup(jlPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jtxtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                             .addComponent(jtxtLastName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtxtPassword)
                             .addComponent(jtxtFirstName, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addContainerGap(322, Short.MAX_VALUE))
         );
@@ -203,11 +196,7 @@ public class UserProfile extends javax.swing.JFrame {
                 .addGroup(jlPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlEmail)
                     .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jlPasswordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlpass))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(jbtnUpdate)
                 .addContainerGap())
         );
@@ -279,7 +268,10 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jtxtFirstNameActionPerformed
-
+/**
+ * if you want to add an event or check the Calendar, you should press MyCalendar button
+ * @param evt 
+ */
     private void jbtnMyCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMyCalendarActionPerformed
         // TODO add your handling code here
         
@@ -287,11 +279,15 @@ public class UserProfile extends javax.swing.JFrame {
         CalendarPage call = new CalendarPage();
         call.setVisible(true);
     }//GEN-LAST:event_jbtnMyCalendarActionPerformed
-
+/**
+ * if user want to edit his/her data, he/she should change the data in jTextFields and then press the update button
+ * to save changes
+ * @param evt 
+ */
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
         // TODO add your handling code here:
         frame = new JFrame("Update");
-        if(JOptionPane.showConfirmDialog(frame, "Confirm if you want to Update", "MYSQL Connector", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION)
+        if(JOptionPane.showConfirmDialog(frame, "Confirm if you want to Update", "Confirm Update", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION)
         {
             
         
@@ -304,16 +300,15 @@ public class UserProfile extends javax.swing.JFrame {
                 String Firstname = jtxtFirstName.getText();
                 String Lastname = jtxtLastName.getText();
                 String Email = jtxtEmail.getText();
-                String Password = jtxtPassword.getText();
+               
                 
                 
-                PreparedStatement update = connection.prepareStatement("update users set fname = ?,lname = ?,email = ?,pass = md5(?) where id = ?");
+                PreparedStatement update = connection.prepareStatement("update users set fname = ?,lname = ?,email = ? where id = ?");
 
                 update.setString(1,Firstname);
                 update.setString(2,Lastname);
                 update.setString(3,Email);
-                update.setString(4,Password);
-                update.setInt(5,id);
+                update.setInt(4,id);
 
                 int i= update.executeUpdate();
 
@@ -336,7 +331,10 @@ public class UserProfile extends javax.swing.JFrame {
         }
         }
     }//GEN-LAST:event_jbtnUpdateActionPerformed
-
+/**
+ *  if user press the logout button, ICalenderFrame is opened
+ * @param evt 
+ */
     private void jbtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLogoutActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -392,10 +390,8 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jlLastName;
     private javax.swing.JPanel jlPassword;
     private javax.swing.JLabel jlUserName;
-    private javax.swing.JLabel jlpass;
     private javax.swing.JTextField jtxtEmail;
     private javax.swing.JTextField jtxtFirstName;
     private javax.swing.JTextField jtxtLastName;
-    private javax.swing.JPasswordField jtxtPassword;
     // End of variables declaration//GEN-END:variables
 }
