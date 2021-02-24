@@ -197,6 +197,12 @@ public class MailSender {
         return message;
          
     }
+    
+    /**
+     * the reminder method sends a reminder to the participants.
+     * the TimerTask will send the email and the Schedule receive the
+     * date from another method
+     */
 
     public void reminder(){
         

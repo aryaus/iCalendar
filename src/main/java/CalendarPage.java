@@ -105,6 +105,8 @@ public final class CalendarPage extends javax.swing.JFrame {
             System.out.println("NO DATABASE CONNECTION!");
         }
     }
+  
+  
     public CalendarPage() {
         initComponents();
         show_Table();
