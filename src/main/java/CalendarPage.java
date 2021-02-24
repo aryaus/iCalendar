@@ -61,14 +61,10 @@ public final class CalendarPage extends javax.swing.JFrame {
     
     Calendar cal = new GregorianCalendar();
     String month_name;
-    /**
-     * Creates new form CalendarPage
-     */
     
-/**
- * This method gets all User´s events from database and displays them as a jTable1
- * @param evt 
- */
+    /**
+     * This method gets all User´s events from database and displays them as a jTable1
+     */
   public void show_Table(){
         
         int c;
@@ -645,7 +641,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 /**
  *  If user presses the logout button, ICalenderFrame will be opened
- * @param evt 
+ * @param evt Event listener
  */
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         this.dispose();
@@ -655,7 +651,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnActionPerformed
 /**
  *  If user presses the back button, UserProfile will be opened
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
         // TODO add your handling code here:
@@ -665,7 +661,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnBackActionPerformed
 /**
  *  If user wants to add a new event, he should press the Add_Event "+" button.
- * @param evt 
+ * @param evt Event listener
  */
     private void Add_EventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_EventActionPerformed
         // TODO add your handling code here:
@@ -675,7 +671,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     }//GEN-LAST:event_Add_EventActionPerformed
 /**
  *  If user wants to edit/update event's data, user should press change button
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnChangeActionPerformed
         // TODO add your handling code here:
@@ -686,7 +682,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnChangeActionPerformed
     /**
      * The current month can be instantly changed if you choose a new month
-     * @param evt 
+     * @param evt Event listener
      */
     private void jMonthChooser1PropertyChange(java.beans.PropertyChangeEvent evt){
         
@@ -698,7 +694,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     }    
     /**
      * The current year can be instantly changed if you choose a new year
-     * @param evt 
+     * @param evt Event listener
      */
     private void jYearChooser1PropertyChange(java.beans.PropertyChangeEvent evt){
         
@@ -711,7 +707,7 @@ public final class CalendarPage extends javax.swing.JFrame {
 
     /**
      * You can choose a certain cell by clicking on it and the color of the cell will be changed
-     * @param evt 
+     * @param evt Event listener
      */
     
    private void jTable11MouseClicked(java.awt.event.MouseEvent evt) {                                     
@@ -725,7 +721,7 @@ public final class CalendarPage extends javax.swing.JFrame {
    
    /**
     * You can jump into the day, that was previously selected, by clicking on it
-    * @param evt 
+    * @param evt Event listener
     */
    
     private void jLabel1_PickDateMouseClicked(java.awt.event.MouseEvent evt) {                                     
@@ -740,7 +736,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     
     /**
      * You’ll be returned to the current date if this button is clicked.
-     * @param evt 
+     * @param evt Event listener
      */
     private void jButton1_currentDayActionPerformed(java.awt.event.ActionEvent evt) {                                         
        int i;

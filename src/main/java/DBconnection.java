@@ -5,7 +5,7 @@ public class DBconnection {
 /**
  * 
  * most used static method, this method connect java application to MySQL database, and creates table users and events if tables do not exist in database
- * @return 
+ * @return get connection
  */
 
     public static Connection connectToDatabase(){
@@ -14,7 +14,7 @@ public class DBconnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin", "root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin", "root","admin");
             System.out.println("Connected to MySQL");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("create database if not exists user");

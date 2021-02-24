@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 
-/**
- *
- * @author ARYA
- */
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +14,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import javafx.event.Event;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -35,8 +31,8 @@ public class MailSender {
     /**
      * This method gets data from database and saves data as String 
      * Participant email Text
-     * @param s
-     * @return
+     * @param s get a String
+     * @return  return string
      * @throws SQLException 
      */
         public static String getData(String s) throws SQLException {
@@ -60,8 +56,8 @@ public class MailSender {
 /**
  * This method gets data from database and saves data as String 
  * Reminder Text
- * @param s
- * @return
+ * @param s get a string
+ * @return return a message
  * @throws SQLException 
  */
 
@@ -84,7 +80,7 @@ public class MailSender {
     }
      /**
       * This method sends email to the participant that user chooses once he adds an event
-      * @param recepient
+      * @param recepient get a string
       * @throws SQLException 
       */
     public static void sendMail(String recepient) throws SQLException{
@@ -118,10 +114,10 @@ public class MailSender {
     
     /**
      * This method prepares the message, that should be sent to the chosen participant
-     * @param session
-     * @param _mailAddress
-     * @param recepient
-     * @return
+     * @param session      get session
+     * @param _mailAddress get the Emailaddress
+     * @param recepient    get recepient
+     * @return             return message
      * @throws SQLException 
      */
     private static Message prepareMessage(Session session, String _mailAddress, String recepient) throws SQLException{
@@ -142,7 +138,7 @@ public class MailSender {
     }
     /**
      * This method sends an email as a reminder to the user 
-     * @param recepient
+     * @param recepient     get recepient
      * @throws SQLException 
      */
      public static void sendReminder(String recepient) throws SQLException{
@@ -174,10 +170,10 @@ public class MailSender {
         }
     /**
      * This method prepares the reminder message, that should be sent to the user
-     * @param session
-     * @param _mailAddress
-     * @param recepient
-     * @return
+     * @param session       get session
+     * @param _mailAddress  get Emailaddress
+     * @param recepient     get recepient
+     * @return              return message
      * @throws SQLException 
      */
     

@@ -316,7 +316,7 @@ public class Registration extends javax.swing.JFrame {
 /**
  * The user should fill in the registration form,this method checks user-input
  * checks for duplicates and invalid inputs
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRegisterActionPerformed
         // TODO add your handling code here:

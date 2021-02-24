@@ -271,7 +271,7 @@ public class UserProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtFirstNameActionPerformed
 /**
  * If you want to add an event or check the Calendar, you should press MyCalendar button
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnMyCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMyCalendarActionPerformed
         // TODO add your handling code here
@@ -283,7 +283,7 @@ public class UserProfile extends javax.swing.JFrame {
 /**
  * If user wants to edit his/her data, he/she should change the data in jTextFields and then press the update button
  * to save changes
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
         // TODO add your handling code here:
@@ -334,7 +334,7 @@ public class UserProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnUpdateActionPerformed
 /**
  *  If user presses the logout button, ICalenderFrame will be opened
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLogoutActionPerformed
         // TODO add your handling code here:

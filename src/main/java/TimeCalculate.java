@@ -30,6 +30,10 @@ public class TimeCalculate {
     private static Date event_date;
     private static String kombo_reminder = "none";
     
+    /**
+     * calculates the date on which the reminder must be set
+     * @throws ParseException 
+     */
     public TimeCalculate() throws ParseException{
          int id = 1;       
         Connection connection = DBconnection.connectToDatabase();
@@ -75,9 +79,9 @@ public class TimeCalculate {
     
     /**
      * It duplicates a certain time and applies it to another wanted date
-     * @param date
-     * @param time
-     * @return 
+     * @param date receive a date
+     * @param time time from an other date
+     * @return return Return the calculation of day
      */
     public static Date copyTimeToDate(Date date, Date time) {
         
@@ -95,9 +99,9 @@ public class TimeCalculate {
     
     /**
      * It adds certain weeks to another wanted date
-     * @param date
-     * @param weeks
-     * @return 
+     * @param date receive a date
+     * @param weeks receive certain weeks
+     * @return Return the calculation of day
      */
     public static Date addWeeksToJavaDate(Date date, int weeks) {
         Calendar calendar = Calendar.getInstance();
@@ -108,9 +112,9 @@ public class TimeCalculate {
 
     /**
      * It adds certain days to another wanted date
-     * @param date
-     * @param days
-     * @return 
+     * @param date receive a date
+     * @param days receive certain days
+     * @return Return the calculation of day
      */
     public static Date adddaysToJavaDate(Date date, int days) {
         Calendar calendar = Calendar.getInstance();
@@ -121,9 +125,9 @@ public class TimeCalculate {
     
     /**
      * It adds certain hours to another wanted date
-     * @param date
-     * @param hours
-     * @return 
+     * @param date receive a date
+     * @param hours receive certain hours
+     * @return Return the calculation of day
      */
     public static Date addHoursToJavaDate(Date date, int hours) {
         Calendar calendar = Calendar.getInstance();
@@ -135,9 +139,9 @@ public class TimeCalculate {
     
     /**
      * It adds certain minutes to another wanted date
-     * @param date
-     * @param minutes
-     * @return 
+     * @param date receive a date
+     * @param minutes receive certain minutes
+     * @return Return the calculation of day
      */
     public static Date addMinutesToJavaDate(Date date, int minutes) {
         Calendar calendar = Calendar.getInstance();
@@ -148,7 +152,7 @@ public class TimeCalculate {
     
     /**
      * It returns how sooner the reminder should be set
-     * @return 
+     * @return Return the calculation of day
      */
     public Date getReminderDate(){
         return TimeCalculate.event_date;

@@ -434,7 +434,7 @@ public class AdminPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 /**
  * If you press the Exit button, the program will be closed
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
         // TODO : Exit
@@ -447,7 +447,7 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnExitActionPerformed
 /**
  *  If you press delete button, the selected user from jTable1 will be deleted
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
         // TODO add your handling code here:
@@ -495,7 +495,7 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 /**
  *  If you press the reset button, all jTextFields will be cleared
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnResetActionPerformed
         // TODO:
@@ -510,7 +510,7 @@ public class AdminPage extends javax.swing.JFrame {
 /**
  * You can select a user-profile and modify the related data
  * If you press the update button, the given data will be saved and displayed in jTable1
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
 
@@ -609,7 +609,7 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtUserNameActionPerformed
 /**
  *  The data of selected user in jTable1 is displayed in related jTextFields
- * @param evt 
+ * @param evt Event listener
  */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -624,7 +624,7 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 /**
  *  If admin presses the logout button, ICalenderFrame will be opened
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLogoutActionPerformed
         // TODO add your handling code here:

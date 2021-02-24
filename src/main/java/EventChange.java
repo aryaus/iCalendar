@@ -552,7 +552,7 @@ public class EventChange extends javax.swing.JFrame {
  * 
  * If you want to edit an event, you should select the event from jTable then you can edit your data and press the update button.
  * The given data are saved and displayed in jTable1
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEdit1ActionPerformed
         // TODO add your handling code here:
@@ -629,7 +629,7 @@ public class EventChange extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableEventMouseClicked
 /**
  * this method converts all data from jTable to pdf file
- * @param evt 
+ * @param evt Event listener
  */
     private void exportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportPdfBtnActionPerformed
         

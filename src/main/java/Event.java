@@ -409,7 +409,7 @@ public class Event extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtEventNameActionPerformed
 /**
  * This method saves all the inputs in event-tables in database, if you press save button
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
    
@@ -477,7 +477,7 @@ public class Event extends javax.swing.JFrame {
     }//GEN-LAST:event_reminderComboBoxActionPerformed
 /**
  *  If user presses the back button, CalendarPage will be opened
- * @param evt 
+ * @param evt Event listener
  */
     private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
         // TODO add your handling code here:

@@ -263,7 +263,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
     }
      /**
      * Once you click the login button, the program calls the checkUser-method
-     * @param evt 
+     * @param evt Event listener
      */
     private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
     // TODO add your handling code here:
@@ -271,7 +271,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnLoginActionPerformed
     /**
      * Once you click the SignUp button, the program opens the Registration window
-     * @param evt 
+     * @param evt Event listener
      */
     private void jbtnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSignupActionPerformed
         // TODO add your handling code here:
