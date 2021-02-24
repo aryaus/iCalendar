@@ -625,7 +625,10 @@ public class EventChange extends javax.swing.JFrame {
         jtxtEventID.setText(RecordTable.getValueAt(selectedIndex, 8).toString());
 
     }//GEN-LAST:event_jTableEventMouseClicked
-
+/**
+ * this method converts all data from jTable to pdf file
+ * @param evt 
+ */
     private void exportPdfBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportPdfBtnActionPerformed
         
               

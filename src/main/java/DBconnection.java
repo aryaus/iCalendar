@@ -1,13 +1,12 @@
-
-
 import java.sql.*;
-import javax.swing.JOptionPane;
 
-//Static class for connecting to database
 public class DBconnection {
     private static final String databaseName = "user";
+/**
+ * most used static method, this method connect java application to MySQL database, and creates table users and events if tables do not exist in database
+ * @return 
+ */
 
-    //most used static method, returns connection
     public static Connection connectToDatabase(){
 
         Connection con = null;
@@ -33,7 +32,9 @@ public class DBconnection {
         
         return con;
     }
-    
+    /**
+     * this method deletes the created database 
+     */
     private static void deleteDatabase()  {
         try {
             Connection con = connectToDatabase();

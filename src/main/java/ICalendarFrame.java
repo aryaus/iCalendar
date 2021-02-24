@@ -94,7 +94,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
 
         checkboxAdmin.setBackground(new java.awt.Color(255, 255, 255));
         checkboxAdmin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        checkboxAdmin.setText("Aminastrator");
+        checkboxAdmin.setText("Administrator");
         checkboxAdmin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         checkboxAdmin.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {

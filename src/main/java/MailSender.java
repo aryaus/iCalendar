@@ -82,7 +82,11 @@ public class MailSender {
         }
         return msg;
     }
-     
+     /**
+      * this method send email to the participant that user chooses once he add an event
+      * @param recepient
+      * @throws SQLException 
+      */
     public static void sendMail(String recepient) throws SQLException{
         
         try {
@@ -112,7 +116,14 @@ public class MailSender {
         
         }
     
-    
+    /**
+     * this method prepare the message, that should be sent to the chosen participant
+     * @param session
+     * @param _mailAddress
+     * @param recepient
+     * @return
+     * @throws SQLException 
+     */
     private static Message prepareMessage(Session session, String _mailAddress, String recepient) throws SQLException{
        Message message = new MimeMessage(session);
        String s="";
@@ -129,6 +140,11 @@ public class MailSender {
         return message;
          
     }
+    /**
+     * this method send an email as a reminder to the user 
+     * @param recepient
+     * @throws SQLException 
+     */
      public static void sendReminder(String recepient) throws SQLException{
         
         try {
@@ -156,7 +172,14 @@ public class MailSender {
         }
         
         }
-    
+    /**
+     * this method prepare the reminder message, that should be sent to user
+     * @param session
+     * @param _mailAddress
+     * @param recepient
+     * @return
+     * @throws SQLException 
+     */
     
     private static Message prepareReminder(Session session, String _mailAddress, String recepient) throws SQLException{
        Message message = new MimeMessage(session);
