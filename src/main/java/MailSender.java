@@ -29,11 +29,11 @@ import javax.mail.internet.MimeMessage;
 
 /**
  *
- * @author ARYA
+ * This class sends Emails to certain participants
  */
 public class MailSender {
     /**
-     * this method gets data from database and and save data as String 
+     * This method gets data from database and saves data as String 
      * Participant email Text
      * @param s
      * @return
@@ -58,7 +58,7 @@ public class MailSender {
     }     
 
 /**
- * this method gets data from database and and save data as String 
+ * This method gets data from database and saves data as String 
  * Reminder Text
  * @param s
  * @return
@@ -83,7 +83,7 @@ public class MailSender {
         return msg;
     }
      /**
-      * this method send email to the participant that user chooses once he add an event
+      * This method sends email to the participant that user chooses once he adds an event
       * @param recepient
       * @throws SQLException 
       */
@@ -117,7 +117,7 @@ public class MailSender {
         }
     
     /**
-     * this method prepare the message, that should be sent to the chosen participant
+     * This method prepares the message, that should be sent to the chosen participant
      * @param session
      * @param _mailAddress
      * @param recepient
@@ -141,7 +141,7 @@ public class MailSender {
          
     }
     /**
-     * this method send an email as a reminder to the user 
+     * This method sends an email as a reminder to the user 
      * @param recepient
      * @throws SQLException 
      */
@@ -173,7 +173,7 @@ public class MailSender {
         
         }
     /**
-     * this method prepare the reminder message, that should be sent to user
+     * This method prepares the reminder message, that should be sent to the user
      * @param session
      * @param _mailAddress
      * @param recepient
@@ -199,7 +199,7 @@ public class MailSender {
     }
     
     /**
-     * the reminder method sends a reminder to the participants.
+     * The reminder method sends a reminder to the participants.
      * the TimerTask will send the email and the Schedule receive the
      * date from another method
      */

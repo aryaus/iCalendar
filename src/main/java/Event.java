@@ -43,7 +43,9 @@ import static javax.swing.UIManager.getString;
 
 /**
  *
- * @author pegah
+ * Users can add their new events and calendar-related data on Event-Page through certain text fields such as
+ * event name, date, duration, location, time and participants.
+ * Priority and reminders could be also set through some combi-boxes on the right. 
  */
 public class Event extends javax.swing.JFrame {
 
@@ -167,7 +169,7 @@ public class Event extends javax.swing.JFrame {
         });
 
         reminderComboBox.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        reminderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 week", "3 days", "1 hour", "10 minutes" }));
+        reminderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "1 week", "3 days", "1 hour", "10 minutes" }));
         reminderComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 reminderComboBoxItemStateChanged(evt);
@@ -406,7 +408,7 @@ public class Event extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtEventNameActionPerformed
 /**
- * this method save all the inputs in events table in database, if you press save button
+ * This method saves all the inputs in event-tables in database, if you press save button
  * @param evt 
  */
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
@@ -474,7 +476,7 @@ public class Event extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_reminderComboBoxActionPerformed
 /**
- *  if user press the back button, CalendarPage is opened
+ *  If user presses the back button, CalendarPage will be opened
  * @param evt 
  */
     private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed

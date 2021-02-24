@@ -10,7 +10,8 @@ import javax.swing.JOptionPane;
  
 /**
  *
- * @author pegah
+ * login page should be the first page that users or admin see. 
+ * It should provide 2 text fields, one for entering the username and the other one for entering the password.
  */
 
 public class ICalendarFrame extends javax.swing.JFrame {
@@ -212,7 +213,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
    /**
     * 
-    * check the login Input, check if user or admin want to login
+    * Checks the login Input, checks if the user or admin wants to login
     */
     public void checkUser(){
         String username =jtxtUsername.getText();
@@ -230,7 +231,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
         }
     }
     /**
-     * compare user input with data in database,
+     * Compares the user input with data in database,
      */
      private void logIn(String username, String password) {
         Connection connection = DBconnection.connectToDatabase();
@@ -245,7 +246,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
                 _password = password;
                 if(rs.next()){
                     ICalendarFrame.user_id = rs.getInt("ID");
-                    //display User Profile
+                    //Display user-profile
                     dispose();
                     UserProfile call = new UserProfile();
                     call.setVisible(true);
@@ -259,16 +260,17 @@ public class ICalendarFrame extends javax.swing.JFrame {
         }else{
                 System.out.println("NO DATABASE CONNECTION!");
                 }
-    }/**
-     * once you push the login button, the program calls the checkUser Method
+    }
+     /**
+     * Once you click the login button, the program calls the checkUser-method
      * @param evt 
      */
     private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
     // TODO add your handling code here:
        checkUser();
     }//GEN-LAST:event_jbtnLoginActionPerformed
-/**
-     * once you push the SignUp button, the program open the Registration window
+    /**
+     * Once you click the SignUp button, the program opens the Registration window
      * @param evt 
      */
     private void jbtnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSignupActionPerformed

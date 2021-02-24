@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author pegah
+ * After the user successfully logged in, the user-profile should be displayed with 
+ * the registered information such as user name, first name, last name and email. 
  */
 public class UserProfile extends javax.swing.JFrame {
 
@@ -28,7 +29,7 @@ public class UserProfile extends javax.swing.JFrame {
         show_profile();
     }
     /**
-     * this method gets all user data from database and display them in respective jTextFields
+     * This method gets all user-data from database and displays them in related jTextFields
      */
     private void show_profile() {
         Connection connection = DBconnection.connectToDatabase();
@@ -269,7 +270,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jtxtFirstNameActionPerformed
 /**
- * if you want to add an event or check the Calendar, you should press MyCalendar button
+ * If you want to add an event or check the Calendar, you should press MyCalendar button
  * @param evt 
  */
     private void jbtnMyCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMyCalendarActionPerformed
@@ -280,7 +281,7 @@ public class UserProfile extends javax.swing.JFrame {
         call.setVisible(true);
     }//GEN-LAST:event_jbtnMyCalendarActionPerformed
 /**
- * if user want to edit his/her data, he/she should change the data in jTextFields and then press the update button
+ * If user wants to edit his/her data, he/she should change the data in jTextFields and then press the update button
  * to save changes
  * @param evt 
  */
@@ -316,7 +317,7 @@ public class UserProfile extends javax.swing.JFrame {
                     
                     JOptionPane.showMessageDialog(null,"Information has been Updated!");
 
-                    show_profile(); // show after update.
+                    show_profile(); // show after updating.
                    
 
                 }else{
@@ -332,7 +333,7 @@ public class UserProfile extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtnUpdateActionPerformed
 /**
- *  if user press the logout button, ICalenderFrame is opened
+ *  If user presses the logout button, ICalenderFrame will be opened
  * @param evt 
  */
     private void jbtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLogoutActionPerformed

@@ -16,8 +16,7 @@ import java.util.*;
  */
 
 /**
- *
- * @author pegah
+ * The admin can access and modify all the user’s information.
  */
 public class AdminPage extends javax.swing.JFrame {
 
@@ -30,7 +29,7 @@ public class AdminPage extends javax.swing.JFrame {
         show_Table(); // call this method to show the updated data in table
     }
     /**
-     * get all User data from database, and shows them in jTable1
+     * Get all user-data from database and shows them in jTable1
      */
     public void show_Table(){
         
@@ -49,7 +48,7 @@ public class AdminPage extends javax.swing.JFrame {
                 RecordTable.setRowCount(0);
                 
                 while(rs.next()){
-                    //Data will be added until finish
+                    //Data will be added until the end
                     Vector v = new Vector();
                     for(int j= 1; j<= c; j++){
                         
@@ -234,6 +233,8 @@ public class AdminPage extends javax.swing.JFrame {
             }
         });
         jTable1.setShowGrid(true);
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -432,7 +433,7 @@ public class AdminPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 /**
- * if you press the Exit button, the program closes
+ * If you press the Exit button, the program will be closed
  * @param evt 
  */
     private void jbtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExitActionPerformed
@@ -445,7 +446,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbtnExitActionPerformed
 /**
- *  if you press delete button, the selected user from jTable1 is deleted
+ *  If you press delete button, the selected user from jTable1 will be deleted
  * @param evt 
  */
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
@@ -493,7 +494,7 @@ public class AdminPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 /**
- *  if you press reset button, all jTextFields are cleared
+ *  If you press the reset button, all jTextFields will be cleared
  * @param evt 
  */
     private void jbtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnResetActionPerformed
@@ -507,8 +508,8 @@ public class AdminPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbtnResetActionPerformed
 /**
- * you can select a user and update/edit users data
- *  if you press update button, the given data are saved and displayed in jTable1
+ * You can select a user-profile and modify the related data
+ * If you press the update button, the given data will be saved and displayed in jTable1
  * @param evt 
  */
     private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
@@ -543,7 +544,7 @@ public class AdminPage extends javax.swing.JFrame {
                     
                     JOptionPane.showMessageDialog(null,"Information has been Updated!");
 
-                    show_Table(); // show the table after update.
+                    show_Table(); // shows the table after updating.
                     jtxtID.setText("");
                     jtxtFirstName.setText("");
                     jtxtLastName.setText("");
@@ -607,7 +608,7 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtUserNameActionPerformed
 /**
- *  the data of selected User in jTable1 is displayed in respective jTextFields
+ *  The data of selected user in jTable1 is displayed in related jTextFields
  * @param evt 
  */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -622,7 +623,7 @@ public class AdminPage extends javax.swing.JFrame {
         jtxtID.setText(RecordTable.getValueAt(selectedIndex, 4).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 /**
- *  if admin press the logout button, ICalenderFrame is opened
+ *  If admin presses the logout button, ICalenderFrame will be opened
  * @param evt 
  */
     private void jbtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLogoutActionPerformed

@@ -32,7 +32,10 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Pouya Nikbakhsh
+ * This class is being used to create a calendar including table models that describe the days of the year.
+ * It’s also used to show the different days of month aka. year.
+ * TableColorCellRenderer class designs the tables & cells and their related colors.
+ * 
  */
 public final class CalendarPage extends javax.swing.JFrame {
     
@@ -63,7 +66,7 @@ public final class CalendarPage extends javax.swing.JFrame {
      */
     
 /**
- * this method gets all events of User from database and displays them as a jTable1
+ * This method gets all User´s events from database and displays them as a jTable1
  * @param evt 
  */
   public void show_Table(){
@@ -118,14 +121,18 @@ public final class CalendarPage extends javax.swing.JFrame {
         
         this.setLayout(new BorderLayout());
         this.setVisible(true);
-        
+       /**
+        * If you press the "Previous" button, previous month will be shown
+        */ 
        jButton1_Previous.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent ae) {
             cal.add(Calendar.MONTH, -1);
             updateMonth();
           }
         });
-      
+        /**
+         * If you press the "Next" button, next month will be showen
+         */
         jButton2_next.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent ae) {
             cal.add(Calendar.MONTH, +1);
@@ -133,32 +140,44 @@ public final class CalendarPage extends javax.swing.JFrame {
           }
         });
         
-        
+        /**
+         * The current month can be instantly changed if you choose a new month
+         */
         jMonthChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jMonthChooser1PropertyChange(evt);
             }
         });
-        
+        /**
+         * The current year can be instantly changed if you choose a new year
+         */
         jYearChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jYearChooser1PropertyChange(evt);
             }   
         });  
-             
+         
+        /**
+         * You can choose  a certain cell by clicking on it
+         */
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable11MouseClicked(evt);
             }
         });
         
-        
+        /**
+         * You can jump into the day, that was previously selected, by clicking on it
+         */
         jLabel1_PickDate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1_PickDateMouseClicked(evt);
             }
         });
         
+        /**
+         * You’ll be returned to the current date if this button is clicked.
+         */
         jbtnCurrentDay.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
               jButton1_currentDayActionPerformed(evt);
@@ -184,7 +203,8 @@ public final class CalendarPage extends javax.swing.JFrame {
     
 
     /**
-     * this Method will Update Months in calendar page
+     * This method puts the days of a certain month/year into a table model. 
+     * It also designs the new table using TableColorCellRenderer
      */
     final void updateMonth() {
         
@@ -200,9 +220,7 @@ public final class CalendarPage extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setRowCount(6);
         int i = startDay-2;
-        /**
-         * if the startDay is sunday.
-         */
+        //If the day is a weekend aka. Sunday
         if(startDay == 1){
             i= i+7;
         }
@@ -220,14 +238,14 @@ public final class CalendarPage extends javax.swing.JFrame {
        
        setCurrentAndFirstDayRowandColumn();
        
-       //with value -1 can I access just one time to the Cell of current day from the start program
+       //You can access the Cell of current day from the start program with -1 just once
        if(CalendarPage.select_cell_column == -1 && CalendarPage.select_cell_row == -1){
            CalendarPage.select_cell_column = CalendarPage.currentDayCell_column;
            CalendarPage.select_cell_row = CalendarPage.currentDayCell_row;
        }
   
        
-       // print selected day
+       //Prints selected day
        if(model.getValueAt(select_cell_row, select_cell_column) != null
           &&CalendarPage.selected_month == CalendarPage.change_month 
           &&CalendarPage.selected_year == CalendarPage.change_year){
@@ -482,6 +500,8 @@ public final class CalendarPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableEvent.getTableHeader().setResizingAllowed(false);
+        jTableEvent.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableEvent);
 
         jbtnChange.setBackground(new java.awt.Color(255, 255, 255));
@@ -624,7 +644,7 @@ public final class CalendarPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTable1MouseClicked
 /**
- *  if user press the logout button, ICalenderFrame is opened
+ *  If user presses the logout button, ICalenderFrame will be opened
  * @param evt 
  */
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
@@ -634,7 +654,7 @@ public final class CalendarPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_logoutBtnActionPerformed
 /**
- *  if user press the back button, UserProfile is opened
+ *  If user presses the back button, UserProfile will be opened
  * @param evt 
  */
     private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
@@ -644,7 +664,7 @@ public final class CalendarPage extends javax.swing.JFrame {
         cal.setVisible(true);
     }//GEN-LAST:event_jbtnBackActionPerformed
 /**
- *  if user want to add a new event, he should press the Add_Event "+" button.
+ *  If user wants to add a new event, he should press the Add_Event "+" button.
  * @param evt 
  */
     private void Add_EventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_EventActionPerformed
@@ -654,7 +674,7 @@ public final class CalendarPage extends javax.swing.JFrame {
         cal.setVisible(true);
     }//GEN-LAST:event_Add_EventActionPerformed
 /**
- *  if user want to edit/update event's data, user should press change button
+ *  If user wants to edit/update event's data, user should press change button
  * @param evt 
  */
     private void jbtnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnChangeActionPerformed
@@ -664,9 +684,9 @@ public final class CalendarPage extends javax.swing.JFrame {
         EventChange cal = new EventChange();
         cal.setVisible(true);
     }//GEN-LAST:event_jbtnChangeActionPerformed
- /**
-     * this Method will Update Months in calendar page based on the 
-     * month chooser in the this page
+    /**
+     * The current month can be instantly changed if you choose a new month
+     * @param evt 
      */
     private void jMonthChooser1PropertyChange(java.beans.PropertyChangeEvent evt){
         
@@ -677,8 +697,8 @@ public final class CalendarPage extends javax.swing.JFrame {
         
     }    
     /**
-     * this Method will Update Years in calendar page based on the 
-     * year chooser in the this page
+     * The current year can be instantly changed if you choose a new year
+     * @param evt 
      */
     private void jYearChooser1PropertyChange(java.beans.PropertyChangeEvent evt){
         
@@ -688,9 +708,10 @@ public final class CalendarPage extends javax.swing.JFrame {
             updateMonth();
   
     }
+
     /**
-     * this Method change the color of the jTable with mouse click
-     * and the row will be chosen 
+     * You can choose a certain cell by clicking on it and the color of the cell will be changed
+     * @param evt 
      */
     
    private void jTable11MouseClicked(java.awt.event.MouseEvent evt) {                                     
@@ -703,9 +724,9 @@ public final class CalendarPage extends javax.swing.JFrame {
     }
    
    /**
-     * this Method will pick a date with mouse click and at the end the month 
-     * will be updated
-     */
+    * You can jump into the day, that was previously selected, by clicking on it
+    * @param evt 
+    */
    
     private void jLabel1_PickDateMouseClicked(java.awt.event.MouseEvent evt) {                                     
         int i;
@@ -717,6 +738,10 @@ public final class CalendarPage extends javax.swing.JFrame {
             updateMonth();
     }
     
+    /**
+     * You’ll be returned to the current date if this button is clicked.
+     * @param evt 
+     */
     private void jButton1_currentDayActionPerformed(java.awt.event.ActionEvent evt) {                                         
        int i;
         i = CalendarPage.change_month - calendar.get(Calendar.MONTH);
@@ -729,8 +754,7 @@ public final class CalendarPage extends javax.swing.JFrame {
             System.out.println(CalendarPage.change_year);
     } 
     /**
-     * this method will add the functionality of the month show table in the calendar
-     * page and it create the right place for the first and last days of the month
+     * It finds the current and first day of the month and stores them as a result in a static variable 
      */
     
     private void setCurrentAndFirstDayRowandColumn() {

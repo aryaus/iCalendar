@@ -16,7 +16,8 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  *
- * @author Pouya Nikbakhsh
+ * This class designs the color of a certain table and also colors the related cells. 
+ * For instance the first day of the month, the current day or days you have events on.
  */
 public class TableColorCellRenderer extends DefaultTableCellRenderer {
         
@@ -41,15 +42,12 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
 
         
         public TableColorCellRenderer(int month_inRenderer, int year_inRenderer){
-//            this.select_cell_column = CalendarPage.select_cell_column;
-//            this.select_cell_row = CalendarPage.select_cell_row;
-            //super();
             this.month_inRenderer = month_inRenderer;
             this.year_inRenderer = year_inRenderer;
         }
     
         
-        
+//        It finds the current and first day of the month and stores them as a result          
         public void setFirst_Current_Day(JTable table){
             for (int k = 0; k < table.getRowCount(); k++) {
                 for (int j = 0; j < table.getColumnCount(); j++) {
@@ -79,26 +77,34 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
 
             setFirst_Current_Day(table); 
 
-            //case1:firstday of month  
+            //case1:first day of the month  
             if (this.f_row == row && this.f_column == column) {
                 c.setBackground(new Color (255, 128, 225));
                 jc.setBorder( new MatteBorder(2, 2, 2, 2, new Color(255, 51, 207)) );
                 c.setForeground(Color.BLACK);
+                    //if first day is today
+                    if(this.c_row == row && this.c_column == column){
+                        c.setForeground(Color.BLUE);
+                    }
                 
-                // if firstday is current day
+                // If first day is the current day
                 if(this.select_cell_column == column && this.select_cell_row == row 
                     &&CalendarPage.selected_month == CalendarPage.change_month &&
                     CalendarPage.selected_year == CalendarPage.change_year){
                     c.setBackground(currentDay_Color);
                     jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
                     c.setForeground(Color.BLACK);
+                    //if first day is today
+                    if(this.c_row == row && this.c_column == column){
+                        c.setForeground(Color.BLUE);
+                    }
                 }
                 
-                // if day is sunday
+                //If the day is a weekend aka. Sunday
                 if(column == 6){
                         c.setForeground(Color.RED);
                     }
-            //case2: for current day of calendar
+            //case2: for current day of the calendar
             }else if(this.c_row == row &&
                     this.c_column == column &&
                     this.current_year == this.year_inRenderer &&
@@ -115,14 +121,9 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                     c.setForeground(Color.BLUE);
                     }
                     
-//                    if(column == 6){
-//                        c.setForeground(Color.RED);
-//                        
-//                    }
-
                 }
             
-            // if day is sunday
+            //If the day is a weekend aka. Sunday
             else if(column == 6 ){
                 c.setBackground(myColor);
                 jc.setBorder(new MatteBorder(-1, -1, -1, -1,Color.BLACK) );
@@ -134,7 +135,7 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                 }
             }    
                 
-             // if one day is selected
+             // If a day is selected
             else {
                 c.setBackground(myColor);
                 jc.setBorder(new MatteBorder(-1, -1, -1, -1,Color.BLACK) );

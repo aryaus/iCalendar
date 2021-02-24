@@ -36,7 +36,8 @@ import java.io.FileNotFoundException;
 
 /**
  *
- * @author pegah
+ * Every user’s event is stored as a row in a table and could be edited & removed by the user.
+ * The buttons back, export PDF, edit and delete have their own functionalities. 
  */
 public class EventChange extends javax.swing.JFrame {
 
@@ -51,11 +52,9 @@ public class EventChange extends javax.swing.JFrame {
       
           
 /**
- * this method gets all events of User from database and displays them as a jTable1
- *
+ * This method gets all user´s events from database and displays them as a jTable1
+ *  
  */
-      
-
     public void show_Table(){
         
         int c;
@@ -74,7 +73,7 @@ public class EventChange extends javax.swing.JFrame {
                 RecordTable.setRowCount(0);
                 
                 while(rs.next()){
-                    //Data will be added until finish
+                    //Data will be added until the end
                     Vector v = new Vector();
                     for(int j= 1; j<= c; j++){
                         
@@ -416,6 +415,8 @@ public class EventChange extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableEvent.getTableHeader().setResizingAllowed(false);
+        jTableEvent.getTableHeader().setReorderingAllowed(false);
         jTableEvent.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableEventMouseClicked(evt);
@@ -489,7 +490,7 @@ public class EventChange extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtEventNameActionPerformed
     
 /**
- *if you want to delete an event,you should choose the event from jTable and then press the delete button
+ *If you want to delete an event,you should choose the event from jTable and then press the delete button
  * 
  */
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
@@ -517,7 +518,7 @@ public class EventChange extends javax.swing.JFrame {
                     
                         JOptionPane.showMessageDialog(null,"Information has been deleted!");
 
-                        show_Table(); // show the table after update.
+                        show_Table(); // show the table after updating.
  
                     }else{
                     JOptionPane.showMessageDialog(null,"Delete failed!");
@@ -536,7 +537,7 @@ public class EventChange extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_reminderComboBoxActionPerformed
 /**
- *  if you want to display calendar page, you should press back button
+ *  If you want to display the calendar page, you should press the back button
  * 
  */
     private void jbtnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBackActionPerformed
@@ -548,8 +549,9 @@ public class EventChange extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbtnBackActionPerformed
 /**
- * if you want to edit a event, you should select the event from jTable then you can edit your data and press update button
- *  the given data are saved and displayed in jTable1
+ * 
+ * If you want to edit an event, you should select the event from jTable then you can edit your data and press the update button.
+ * The given data are saved and displayed in jTable1
  * @param evt 
  */
     private void jbtnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEdit1ActionPerformed
@@ -588,7 +590,7 @@ public class EventChange extends javax.swing.JFrame {
                     
                     JOptionPane.showMessageDialog(null,"Information has been Updated!");
 
-                    show_Table(); // show the table after update.
+                    show_Table(); // show the table after updating.
                     
 
                 }else{
@@ -603,7 +605,7 @@ public class EventChange extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbtnEdit1ActionPerformed
 /**
- * the data of selected event are displayed in respective jTextFields
+ * The data of the selected event are displayed in related jTextFields
  * 
  */
     private void jTableEventMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEventMouseClicked

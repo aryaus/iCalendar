@@ -10,7 +10,10 @@ import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 /**
  *
- * @author pegah
+ * The registration page should be displayed after clicking on the ‘sign up’ button. 
+ * It should provide six text fields  for entering first name, last name, email, user name, password and re-password .
+ * If any text fields are left blank or the chosen user name already exists the user will get an error. 
+ * If the two passwords are different that must also be reported as an error and the e-mail address must be given in a correct format.
  */
 public class Registration extends javax.swing.JFrame {
    
@@ -268,7 +271,7 @@ public class Registration extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 /**
- * Insert user data into database, check if Database connection exists
+ * Inserts user-data into database, checks if Database connection exists
  */
     private void Registration(String fname, String lname, String email, String uname, String pass) {
        
@@ -299,8 +302,9 @@ public class Registration extends javax.swing.JFrame {
                 }
     
 }
-/**shows the registration functionality
-
+/**
+ * Shows the registration functionality
+ * 
  */
     private void passwordField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordField2FocusLost
         // TODO add your handling code here:
@@ -309,9 +313,9 @@ public class Registration extends javax.swing.JFrame {
     private void jtxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtEmailActionPerformed
-/***
- * the user should fill in the registration form,this method check user input
- * check for duplicate and invalid input
+/**
+ * The user should fill in the registration form,this method checks user-input
+ * checks for duplicates and invalid inputs
  * @param evt 
  */
     private void jbtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRegisterActionPerformed

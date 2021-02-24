@@ -3,6 +3,7 @@ import java.sql.*;
 public class DBconnection {
     private static final String databaseName = "user";
 /**
+ * 
  * most used static method, this method connect java application to MySQL database, and creates table users and events if tables do not exist in database
  * @return 
  */
