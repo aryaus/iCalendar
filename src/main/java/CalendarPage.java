@@ -106,7 +106,10 @@ public final class CalendarPage extends javax.swing.JFrame {
         }
     }
   
-  
+  /**
+   * This method will create the whole functionality of the calendar
+   * 
+   */
     public CalendarPage() {
         initComponents();
         show_Table();
@@ -181,7 +184,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     
 
     /**
-     * Update Months
+     * this Method will Update Months in calendar page
      */
     final void updateMonth() {
         
@@ -661,7 +664,10 @@ public final class CalendarPage extends javax.swing.JFrame {
         EventChange cal = new EventChange();
         cal.setVisible(true);
     }//GEN-LAST:event_jbtnChangeActionPerformed
-
+ /**
+     * this Method will Update Months in calendar page based on the 
+     * month chooser in the this page
+     */
     private void jMonthChooser1PropertyChange(java.beans.PropertyChangeEvent evt){
         
           int i;
@@ -670,7 +676,10 @@ public final class CalendarPage extends javax.swing.JFrame {
           updateMonth();
         
     }    
-    
+    /**
+     * this Method will Update Years in calendar page based on the 
+     * year chooser in the this page
+     */
     private void jYearChooser1PropertyChange(java.beans.PropertyChangeEvent evt){
         
             int i;
@@ -679,7 +688,10 @@ public final class CalendarPage extends javax.swing.JFrame {
             updateMonth();
   
     }
-    
+    /**
+     * this Method change the color of the jTable with mouse click
+     * and the row will be chosen 
+     */
     
    private void jTable11MouseClicked(java.awt.event.MouseEvent evt) {                                     
    
@@ -689,6 +701,12 @@ public final class CalendarPage extends javax.swing.JFrame {
         CalendarPage.selected_year=cal.get(Calendar.YEAR);
         updateMonth();
     }
+   
+   /**
+     * this Method will pick a date with mouse click and at the end the month 
+     * will be updated
+     */
+   
     private void jLabel1_PickDateMouseClicked(java.awt.event.MouseEvent evt) {                                     
         int i;
         i = CalendarPage.change_month - CalendarPage.selected_month;
@@ -710,6 +728,10 @@ public final class CalendarPage extends javax.swing.JFrame {
             updateMonth();
             System.out.println(CalendarPage.change_year);
     } 
+    /**
+     * this method will add the functionality of the month show table in the calendar
+     * page and it create the right place for the first and last days of the month
+     */
     
     private void setCurrentAndFirstDayRowandColumn() {
         for (int k = 0; k < jTable1.getRowCount(); k++) {
@@ -730,7 +752,9 @@ public final class CalendarPage extends javax.swing.JFrame {
         
     }
     
-    
+    /**
+     * this is the mail method, which will call the calendar page and make it visible
+     */
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
