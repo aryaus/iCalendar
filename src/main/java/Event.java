@@ -51,6 +51,9 @@ import static javax.swing.UIManager.getString;
 public class Event extends javax.swing.JFrame {
 
   static String Email = "";
+  static String date ="";
+  static String rmd = "";
+  static String time = "";
     /**
      * Creates new form Event
      */
@@ -431,12 +434,13 @@ public class Event extends javax.swing.JFrame {
                     
                     pstmt.setString(1,jtxtEventName.getText());
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String date = sdf.format(jDateChooseriDate.getDate());
+                    date = sdf.format(jDateChooseriDate.getDate());
+               
                     pstmt.setString(2,date);
 
                     SimpleDateFormat sdft = new SimpleDateFormat("hh:mm a");
                     sdft.setTimeZone(TimeZone.getDefault());
-                    String time =sdft.format( timeChooser.getValue());
+                    time =sdft.format( timeChooser.getValue());
                     pstmt.setString(3,time);
                     pstmt.setString(4,jtxtDuration.getText());
                     pstmt.setString(5,jtxtLocation.getText());
@@ -444,7 +448,7 @@ public class Event extends javax.swing.JFrame {
                     pstmt.setString(7,priorityComboBox.getSelectedItem().toString());
                     pstmt.setString(8,reminderComboBox.getSelectedItem().toString());
                     pstmt.setInt(9, ICalendarFrame.user_id);
-                    
+                    rmd =reminderComboBox.getSelectedItem().toString();
                     
                     
                     int rs= pstmt.executeUpdate();
@@ -463,6 +467,7 @@ public class Event extends javax.swing.JFrame {
         try {
             TimeCalculate t = new TimeCalculate();
             System.out.println("hi"+ t.getReminderDate());
+            System.out.println(date);
             MailSender.sendMail(par);
             MailSender.reminder();
             

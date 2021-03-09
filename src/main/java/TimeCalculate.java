@@ -47,21 +47,15 @@ public class TimeCalculate {
      * @throws ParseException catch the Exception as parse
      */
     public TimeCalculate() throws ParseException{
-         int id = 1;       
+         int id = ICalendarFrame.user_id;       
         
         Connection connection = DBconnection.connectToDatabase();
         if(connection != null){
             try {
-                
-                  PreparedStatement pstmt = (PreparedStatement)
-                  connection.prepareStatement("SELECT  eventDate,eventTime, reminder FROM events where UserID =  '" + id + "'");
-                  ResultSet rs = pstmt.executeQuery();
-                  rs.next();
-                  String dat = rs.getString("eventDate");
-                  String time = rs.getString("eventTime");
-                  kombo_reminder = rs.getString("reminder");
-                  Date date_time = new SimpleDateFormat("hh:mm aaa").parse(time);
-                  Date date=new SimpleDateFormat("yyyy-MM-dd").parse(dat);
+
+                  kombo_reminder = Event.rmd;
+                  Date date_time = new SimpleDateFormat("hh:mm aaa").parse(Event.time);
+                  Date date=new SimpleDateFormat("yyyy-MM-dd").parse(Event.date);
                   event_date = copyTimeToDate(date, date_time); 
           
                 connection.close();

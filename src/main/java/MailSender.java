@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Properties;
@@ -203,7 +204,7 @@ public class MailSender {
      * date from another method
      */
 
-    public static void reminder(){
+    public static void reminder() throws ParseException{
         
         TimerTask timer = new TimerTask() {
             @Override
@@ -218,8 +219,8 @@ public class MailSender {
             }
         };
         Timer t = new Timer();
-        
-        t.schedule(timer, 0, 0);
+        TimeCalculate t_event = new TimeCalculate();
+        t.schedule(timer,t_event.getReminderDate());
         //t.schedule(timer, LocalDateTime.now(), 1);
        
         
