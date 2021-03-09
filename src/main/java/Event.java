@@ -49,7 +49,7 @@ import static javax.swing.UIManager.getString;
  */
 public class Event extends javax.swing.JFrame {
 
-  
+  static String Email = "";
     /**
      * Creates new form Event
      */
@@ -414,7 +414,7 @@ public class Event extends javax.swing.JFrame {
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
    
             String par = jtxtParticipant.getText();
-            String Email = "";
+            
             Connection connection = DBconnection.connectToDatabase();
             int id = ICalendarFrame.user_id;
             if(connection != null){

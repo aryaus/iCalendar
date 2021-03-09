@@ -10,9 +10,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -30,15 +39,20 @@ public class TimeCalculate {
     private static Date event_date;
     private static String kombo_reminder = "none";
     
+    
+   
+    
     /**
      * calculates the date on which the reminder must be set
      * @throws ParseException 
      */
     public TimeCalculate() throws ParseException{
          int id = 1;       
+        
         Connection connection = DBconnection.connectToDatabase();
         if(connection != null){
             try {
+                
                   PreparedStatement pstmt = (PreparedStatement)
                   connection.prepareStatement("SELECT eventName, eventDate,eventTime, location, reminder FROM events where UserID =  '" + id + "'");
                   ResultSet rs = pstmt.executeQuery();
@@ -61,10 +75,12 @@ public class TimeCalculate {
         
         if(kombo_reminder.equals("10 minutes") ){
             TimeCalculate.event_date = addMinutesToJavaDate(TimeCalculate.event_date, -10);
+             
         }
         
         else if(kombo_reminder.equals("1 hour")){
             TimeCalculate.event_date = addHoursToJavaDate(TimeCalculate.event_date, -1);
+            
         }
         
         else if(kombo_reminder.equals("3 days")){
@@ -73,6 +89,7 @@ public class TimeCalculate {
         
         else if(kombo_reminder.equals("1 week")){
             TimeCalculate.event_date = addWeeksToJavaDate(TimeCalculate.event_date, -1);
+            
         }
            
     }
@@ -154,7 +171,7 @@ public class TimeCalculate {
      * It returns how sooner the reminder should be set
      * @return Return the calculation of day
      */
-    public Date getReminderDate(){
+    public static Date getReminderDate(){
         return TimeCalculate.event_date;
     }
  

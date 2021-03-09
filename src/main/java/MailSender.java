@@ -205,11 +205,17 @@ public class MailSender {
         TimerTask timer = new TimerTask() {
             @Override
             public void run() {
-               // sendMail();
+                try {
+                    sendReminder(Event.Email);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
             }
         };
         Timer t = new Timer();
-        t.schedule(timer, 0, 0);
+        t.schedule(timer, TimeCalculate.getReminderDate());
+        
         
     }
     

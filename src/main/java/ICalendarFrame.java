@@ -232,13 +232,15 @@ public class ICalendarFrame extends javax.swing.JFrame {
     }
     /**
      * Compares the user input with data in database,
+     * @param username get Username
+     * @param password get Password
      */
      private void logIn(String username, String password) {
         Connection connection = DBconnection.connectToDatabase();
         if(connection != null){
             try {
                 PreparedStatement pstmt = (PreparedStatement)
-                connection.prepareStatement("select * from users where uname = ? and pass = md5(?)");
+                connection.prepareStatement("select * from users where uname = ? and pass = SHA2(?,256)");
                 pstmt.setString(1,username);
                 pstmt.setString(2,password);
                 ResultSet rs= pstmt.executeQuery();
@@ -324,6 +326,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ICalendarFrame().setVisible(true);
             }

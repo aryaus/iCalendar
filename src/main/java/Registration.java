@@ -272,6 +272,11 @@ public class Registration extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 /**
  * Inserts user-data into database, checks if Database connection exists
+     * @param fname  get First name input
+     * @param lname  get Last name input
+     * @param email  get Email input
+     * @param uname  get User name input
+     * @param pass   get Password input
  */
     private void Registration(String fname, String lname, String email, String uname, String pass) {
        
@@ -281,7 +286,7 @@ public class Registration extends javax.swing.JFrame {
             try {
                 
                 PreparedStatement pstmt = (PreparedStatement)
-                   connection.prepareStatement("insert into users(fname,lname,email,uname,pass) values(?,?,?,?,md5(?)) ");
+                   connection.prepareStatement("insert into users(fname,lname,email,uname,pass) values(?,?,?,?,SHA(?,256)");
                 
                 pstmt.setString(1,fname);
                 pstmt.setString(2,lname);
