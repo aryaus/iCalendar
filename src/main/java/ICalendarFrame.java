@@ -240,7 +240,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
         if(connection != null){
             try {
                 PreparedStatement pstmt = (PreparedStatement)
-                connection.prepareStatement("select * from users where uname = ? and pass = SHA2(?,256)");
+                connection.prepareStatement("select * from users where uname = ? and pass = md5(?)");
                 pstmt.setString(1,username);
                 pstmt.setString(2,password);
                 ResultSet rs= pstmt.executeQuery();

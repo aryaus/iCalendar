@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Properties;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -33,7 +36,7 @@ public class MailSender {
      * Participant email Text
      * @param s get a String
      * @return  return string
-     * @throws SQLException 
+     * @throws SQLException catch Exception of database
      */
         public static String getData(String s) throws SQLException {
         String msg ="";
@@ -58,7 +61,7 @@ public class MailSender {
  * Reminder Text
  * @param s get a string
  * @return return a message
- * @throws SQLException 
+ * @throws SQLException catch Exception of database
  */
 
     public static String getDataReminder(String s) throws SQLException {
@@ -81,7 +84,7 @@ public class MailSender {
      /**
       * This method sends email to the participant that user chooses once he adds an event
       * @param recepient get a string
-      * @throws SQLException 
+      * @throws SQLException    catch Exception of database
       */
     public static void sendMail(String recepient) throws SQLException{
         
@@ -118,7 +121,7 @@ public class MailSender {
      * @param _mailAddress get the Emailaddress
      * @param recepient    get recepient
      * @return             return message
-     * @throws SQLException 
+     * @throws SQLException catch Exception of database
      */
     private static Message prepareMessage(Session session, String _mailAddress, String recepient) throws SQLException{
        Message message = new MimeMessage(session);
@@ -139,7 +142,7 @@ public class MailSender {
     /**
      * This method sends an email as a reminder to the user 
      * @param recepient     get recepient
-     * @throws SQLException 
+     * @throws SQLException catch Exception of database
      */
      public static void sendReminder(String recepient) throws SQLException{
         
@@ -200,12 +203,13 @@ public class MailSender {
      * date from another method
      */
 
-    public void reminder(){
+    public static void reminder(){
         
         TimerTask timer = new TimerTask() {
             @Override
             public void run() {
                 try {
+                   // 
                     sendReminder(Event.Email);
                 } catch (SQLException ex) {
                     Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,8 +218,10 @@ public class MailSender {
             }
         };
         Timer t = new Timer();
-        t.schedule(timer, TimeCalculate.getReminderDate());
         
+        t.schedule(timer, 0, 0);
+        //t.schedule(timer, LocalDateTime.now(), 1);
+       
         
     }
     

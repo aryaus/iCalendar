@@ -286,7 +286,7 @@ public class Registration extends javax.swing.JFrame {
             try {
                 
                 PreparedStatement pstmt = (PreparedStatement)
-                   connection.prepareStatement("insert into users(fname,lname,email,uname,pass) values(?,?,?,?,SHA(?,256)");
+                   connection.prepareStatement("insert into users(fname,lname,email,uname,pass) values(?,?,?,?,md5(?))");
                 
                 pstmt.setString(1,fname);
                 pstmt.setString(2,lname);
@@ -342,15 +342,19 @@ public class Registration extends javax.swing.JFrame {
         ResultSet rs = stmt.executeQuery("select * from users where uname='"+uname+"'");
         if(rs.next()){
             JOptionPane.showMessageDialog(null, "This Username already exists. Please pick another Username","ERROR",JOptionPane.ERROR_MESSAGE);
+            usernameField.setText("");
         }else if (!(Pattern.matches("^[a-zA-Z0-9._-]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email))) 
 {
             JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);
+            jtxtEmail.setText("");
             
         }else if(fname.isEmpty()||lname.isEmpty()||email.isEmpty()||uname.isEmpty()|pass.isEmpty())
         {
             JOptionPane.showMessageDialog(null, "Please complete your Registration","ERROR",JOptionPane.ERROR_MESSAGE);
         }else if(!pass.equals(re_pass)) {
-        JOptionPane.showMessageDialog(null, "The Password does not match. Please type the Password again.","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The Password does not match. Please type the Password again.","ERROR",JOptionPane.ERROR_MESSAGE);
+            passwordField1.setText("");
+            passwordField2.setText("");
         }else{
             Registration(fname,lname,email,uname,pass);
          }

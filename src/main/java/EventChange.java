@@ -36,7 +36,7 @@ import java.io.FileNotFoundException;
 
 /**
  *
- * Every user’s event is stored as a row in a table and could be edited & removed by the user.
+ * Every user’s event is stored as a row in a table and could be edited and  removed by the user.
  * The buttons back, export PDF, edit and delete have their own functionalities. 
  */
 public class EventChange extends javax.swing.JFrame {
@@ -507,7 +507,7 @@ public class EventChange extends javax.swing.JFrame {
             try {
 
                 String id = jtxtEventID.getText();
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Do want to Delete the Event", "Warning",JOptionPane.YES_NO_OPTION);
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Do want to Delete the Event?", "Warning",JOptionPane.YES_NO_OPTION);
                 if(dialogResult == JOptionPane.YES_OPTION){
                 
                     PreparedStatement delete = connection.prepareStatement("delete from events where id = ?");

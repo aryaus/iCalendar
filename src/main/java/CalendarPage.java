@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * This class is being used to create a calendar including table models that describe the days of the year.
  * It’s also used to show the different days of month aka. year.
- * TableColorCellRenderer class designs the tables & cells and their related colors.
+ * TableColorCellRenderer class designs the tables and cells and their related colours.
  * 
  */
 public final class CalendarPage extends javax.swing.JFrame {
@@ -774,6 +774,7 @@ public final class CalendarPage extends javax.swing.JFrame {
     
     /**
      * this is the mail method, which will call the calendar page and make it visible
+     * @param args the command line arguments
      */
     
     public static void main(String args[]) {

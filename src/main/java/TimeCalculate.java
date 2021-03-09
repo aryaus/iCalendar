@@ -44,7 +44,7 @@ public class TimeCalculate {
     
     /**
      * calculates the date on which the reminder must be set
-     * @throws ParseException 
+     * @throws ParseException catch the Exception as parse
      */
     public TimeCalculate() throws ParseException{
          int id = 1;       
@@ -54,15 +54,15 @@ public class TimeCalculate {
             try {
                 
                   PreparedStatement pstmt = (PreparedStatement)
-                  connection.prepareStatement("SELECT eventName, eventDate,eventTime, location, reminder FROM events where UserID =  '" + id + "'");
+                  connection.prepareStatement("SELECT  eventDate,eventTime, reminder FROM events where UserID =  '" + id + "'");
                   ResultSet rs = pstmt.executeQuery();
                   rs.next();
                   String dat = rs.getString("eventDate");
                   String time = rs.getString("eventTime");
-                  TimeCalculate.kombo_reminder = rs.getString("reminder");
+                  kombo_reminder = rs.getString("reminder");
                   Date date_time = new SimpleDateFormat("hh:mm aaa").parse(time);
                   Date date=new SimpleDateFormat("yyyy-MM-dd").parse(dat);
-                  TimeCalculate.event_date = copyTimeToDate(date, date_time); 
+                  event_date = copyTimeToDate(date, date_time); 
           
                 connection.close();
             }catch (SQLException ex){
@@ -73,24 +73,7 @@ public class TimeCalculate {
         }
         
         
-        if(kombo_reminder.equals("10 minutes") ){
-            TimeCalculate.event_date = addMinutesToJavaDate(TimeCalculate.event_date, -10);
-             
-        }
         
-        else if(kombo_reminder.equals("1 hour")){
-            TimeCalculate.event_date = addHoursToJavaDate(TimeCalculate.event_date, -1);
-            
-        }
-        
-        else if(kombo_reminder.equals("3 days")){
-            TimeCalculate.event_date = adddaysToJavaDate(TimeCalculate.event_date, -3);
-        }
-        
-        else if(kombo_reminder.equals("1 week")){
-            TimeCalculate.event_date = addWeeksToJavaDate(TimeCalculate.event_date, -1);
-            
-        }
            
     }
     
@@ -172,7 +155,25 @@ public class TimeCalculate {
      * @return Return the calculation of day
      */
     public static Date getReminderDate(){
-        return TimeCalculate.event_date;
+        if(kombo_reminder.equals("10 minutes") ){
+            event_date = addMinutesToJavaDate(event_date, -10);
+             
+        }
+        
+        else if(kombo_reminder.equals("1 hour")){
+            event_date = addHoursToJavaDate(event_date, -1);
+            
+        }
+        
+        else if(kombo_reminder.equals("3 days")){
+            event_date = adddaysToJavaDate(event_date, -3);
+        }
+        
+        else if(kombo_reminder.equals("1 week")){
+            event_date = addWeeksToJavaDate(event_date, -1);
+            
+        }
+        return event_date;
     }
  
 }

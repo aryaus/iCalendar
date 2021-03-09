@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -460,15 +461,19 @@ public class Event extends javax.swing.JFrame {
             
             
         try {
+            TimeCalculate t = new TimeCalculate();
+            System.out.println("hi"+ t.getReminderDate());
             MailSender.sendMail(par);
-            MailSender.sendReminder(Email);
+            MailSender.reminder();
             
             
             
             // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (ParseException ex) {
+          Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
+      }
       
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
