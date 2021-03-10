@@ -452,6 +452,7 @@ public class Event extends javax.swing.JFrame {
                     
                     
                     int rs= pstmt.executeUpdate();
+                    connection.close();
                     JOptionPane.showMessageDialog(this, "Event added successfully","DONE",JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     CalendarPage cal = new CalendarPage();

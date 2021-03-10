@@ -51,6 +51,7 @@ public class MailSender {
        
                 msg= "Information! \nYou are going to have a(n) " + rs.getString("eventName") + " on " + rs.getString("eventDate") + "at "+rs.getString("eventTime")+ " in " +  rs.getString("location")+ ", with " +rs.getString("fname")+" " +rs.getString("lname");
             }
+        con.close();    
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,6 +78,7 @@ public class MailSender {
             while (rs.next()) {
                 msg= "Reminder! \nYour appointment , " + rs.getString("eventName") + ", will take place on " + rs.getString("eventDate") + " in " +  rs.getString("location")+ ", it will start in " +rs.getString("reminder")+" at " +rs.getString("eventTime")+" .";
             }
+        con.close();    
         } catch (SQLException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }

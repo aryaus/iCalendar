@@ -1,8 +1,17 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.print.PrinterException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +38,8 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
         int f_column;
         int c_row;
         int c_column;
+        int event_row;
+        int event_column;
         int month_inRenderer;
         int year_inRenderer;
         int current_year = calendar.get(Calendar.YEAR);
@@ -39,7 +50,9 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
         int select_cell_column = CalendarPage.select_cell_column;;
         int select_cell_row = CalendarPage.select_cell_row;
         
-
+        List<Date> date_arr = new ArrayList<>();
+        List<String> pry_arr = new ArrayList<>();
+        
         
         public TableColorCellRenderer(int month_inRenderer, int year_inRenderer){
             this.month_inRenderer = month_inRenderer;
@@ -65,8 +78,21 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
             }
         }
         
-        
-        
+        //        It finds the event day of the month and stores them as a result
+        //        x is the day's month of event
+        public void set_event_Day(JTable table, int x){
+            for (int k = 0; k < table.getRowCount(); k++) {
+                for (int j = 0; j < table.getColumnCount(); j++) {
+                  if(table.getValueAt(k,j) != null){  
+                        int int_atCell = Integer.parseInt(table.getValueAt(k, j).toString());
+                        if(int_atCell == x){
+                            this.event_row = k;
+                            this.event_column = j;     
+                    }
+                }
+            }
+        }
+    }    
         
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) { 
@@ -74,7 +100,28 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
             JComponent jc = (JComponent)c;
             Object value_present = table.getValueAt(row, column);
             Object value_in_table = CalendarPage.model.getValueAt(row, column);   
-
+            
+            try {
+                this.arrays();
+            } catch (ParseException ex) {
+                Logger.getLogger(TableColorCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
+            // for each date
+            for(int i=0; i<date_arr.size();i++){
+               Calendar cali = new GregorianCalendar();
+//               cali.setTime(date_arr.get(3));
+                cali.setTime(date_arr.get(i));
+                System.out.println(cali.getTime());
+                set_event_Day(table, cali.get(cali.DAY_OF_MONTH));
+                int event_month = cali.get(cali.MONTH) + 1;
+                System.out.println(cali.get(cali.MONTH));
+                int event_year =cali.get(cali.YEAR) ;
+//                System.out.println("event_Day :"+cali.DAY_OF_MONTH+"     event_month : "+ event_month + "  event_year : " + event_year +"\n");
+                
+            }
+            
+            
             setFirst_Current_Day(table); 
 
             //case1:first day of the month  
@@ -150,6 +197,41 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                 } 
             }
                 return c;
-        } 
+        }
+        
+        public void arrays() throws ParseException{
+                int id = ICalendarFrame.user_id;       
+      
+            Connection connection = DBconnection.connectToDatabase();
+            if(connection != null){
+                try {
+                      String query = "SELECT  eventDate,eventTime, priority FROM events where UserID =  '" + id + "'";
+                      PreparedStatement pstmt = (PreparedStatement)
+                      connection.prepareStatement(query);
+                      ResultSet rs = pstmt.executeQuery();
+                      
+                      int i = 0;
+                      int j = 0;
+                      while(rs.next()){
+                          
+                        String dat = rs.getString("eventDate");
+                        String time = rs.getString("eventTime");
+                        String priority = rs.getString("priority");
+                        Date date_time = new SimpleDateFormat("hh:mm aaa").parse(time);
+                        Date date=new SimpleDateFormat("yyyy-MM-dd").parse(dat);
+                        
+                        this.date_arr.add(TimeCalculate.copyTimeToDate(date, date_time));
+                        this.pry_arr.add(priority);
+                        
+                      }
+                      
+                      connection.close();
+                }catch (SQLException ex){
+                    Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                System.out.println("NO DATABASE CONNECTION!");
+            }
+        }
 
 }

@@ -52,7 +52,7 @@ public class UserProfile extends javax.swing.JFrame {
                     String email = rs.getString("email");
                     jtxtEmail.setText(email); 
                 }
-                
+            connection.close();    
             } catch (SQLException ex) {
             Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -323,7 +323,7 @@ public class UserProfile extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(null,"Update failed!");
                 }
-
+             connection.close();
             } catch (SQLException ex){
                 Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }

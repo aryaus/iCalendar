@@ -485,7 +485,7 @@ public class AdminPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Delete failed!");
                     }
                 }
-
+            connection.close();
             } catch (SQLException ex){
                 Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -556,6 +556,7 @@ public class AdminPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Update failed!");
                 }
                 }
+            connection.close();
             } catch (SQLException ex){
                 Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }

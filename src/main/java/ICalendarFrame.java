@@ -255,7 +255,7 @@ public class ICalendarFrame extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "Username and Password do not match","ERROR",JOptionPane.ERROR_MESSAGE);
                 }
-                
+            connection.close();    
             } catch (SQLException ex) {
             Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }

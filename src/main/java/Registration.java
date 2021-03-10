@@ -299,6 +299,7 @@ public class Registration extends javax.swing.JFrame {
                 this.dispose();
                 ICalendarFrame login = new ICalendarFrame();
                 login.setVisible(true);
+            connection.close();    
             } catch (SQLException ex) {
             Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -358,6 +359,7 @@ public class Registration extends javax.swing.JFrame {
         }else{
             Registration(fname,lname,email,uname,pass);
          }
+        connection.close();
         }catch (SQLException ex) {
             Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
