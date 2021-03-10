@@ -641,7 +641,7 @@ public class EventChange extends javax.swing.JFrame {
         
         if(x == JFileChooser.APPROVE_OPTION){
             path = file.getSelectedFile().getPath();
-        }
+        
         
         Document doc= new Document();
         
@@ -650,7 +650,7 @@ public class EventChange extends javax.swing.JFrame {
               
               doc.open();
               
-              PdfPTable tbl = new PdfPTable(8);
+              PdfPTable tbl = new PdfPTable(9);
               
               // adding header
               tbl.addCell("Name");
@@ -678,6 +678,7 @@ public class EventChange extends javax.swing.JFrame {
         
         tbl.addCell(name);
         tbl.addCell(date);
+        tbl.addCell(time);
         tbl.addCell(duration);
         tbl.addCell(location);
         tbl.addCell(participant);
@@ -699,7 +700,7 @@ public class EventChange extends javax.swing.JFrame {
           }
         
           doc.close();
-        
+        }
               
         
         // TODO add your handling code here:
