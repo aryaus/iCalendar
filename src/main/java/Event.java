@@ -465,9 +465,7 @@ public class Event extends javax.swing.JFrame {
             
             
         try {
-            TimeCalculate t = new TimeCalculate();
-            System.out.println("hi"+ t.getReminderDate());
-            System.out.println(date);
+
             MailSender.sendMail(par);
             MailSender.reminder();
             

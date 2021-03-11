@@ -345,7 +345,7 @@ public class Registration extends javax.swing.JFrame {
             usernameField.setText("");
         }else if (!(Pattern.matches("^[a-zA-Z0-9._-]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", email))) 
 {
-            JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please enter a valid email adrdress", "Error", JOptionPane.ERROR_MESSAGE);
             jtxtEmail.setText("");
             
         }else if(fname.isEmpty()||lname.isEmpty()||email.isEmpty()||uname.isEmpty()|pass.isEmpty())
