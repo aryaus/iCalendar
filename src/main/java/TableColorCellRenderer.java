@@ -38,21 +38,19 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
         int f_column;
         int c_row;
         int c_column;
-        int event_row;
-        int event_column;
+        int event_row = -1;
+        int event_column = -1;
         int month_inRenderer;
         int year_inRenderer;
         int current_year = calendar.get(Calendar.YEAR);
         int current_month = calendar.get(Calendar.MONTH) + 1;
-        Color myColor = new Color(218, 218, 241);
-        Color currentDay_Color = new Color(181, 181, 227);
+        Color myColor = new Color(204, 242, 255);
+        Color currentDay_Color = new Color(153, 230, 255);
         
         int select_cell_column = CalendarPage.select_cell_column;;
         int select_cell_row = CalendarPage.select_cell_row;
         
-        List<Date> date_arr = new ArrayList<>();
-        List<String> pry_arr = new ArrayList<>();
-        
+ 
         
         public TableColorCellRenderer(int month_inRenderer, int year_inRenderer){
             this.month_inRenderer = month_inRenderer;
@@ -88,11 +86,43 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                         if(int_atCell == x){
                             this.event_row = k;
                             this.event_column = j;     
+                        }
                     }
                 }
             }
         }
-    }    
+        
+        public void set_event_color(JTable table, int row, int column,Component c, JComponent jc){
+            for(int i=0; i<CalendarPage.date_arr.size();i++){
+                Calendar cali = new GregorianCalendar();
+                cali.setTime(CalendarPage.date_arr.get(i));
+                set_event_Day(table, cali.get(Calendar.DAY_OF_MONTH));
+                int event_month = cali.get(Calendar.MONTH) + 1;
+                int event_year =cali.get(Calendar.YEAR);
+                    if(this.event_row == row &&
+                        this.event_column == column &&
+                         event_year == this.year_inRenderer &&
+                        event_month == this.month_inRenderer) 
+                    {
+                        if(CalendarPage.pry_arr.get(i).equals("high")){
+                          jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(255, 128, 128)) );
+                          c.setBackground(new Color(255, 128, 128));
+
+                        }else if(CalendarPage.pry_arr.get(i).equals("medium")){
+                           jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(255, 255, 179)) );
+                           c.setBackground(new Color(255, 255, 179));
+
+                        }else if(CalendarPage.pry_arr.get(i).equals("low")){
+                           jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(153, 255, 153)) );
+                           c.setBackground(new Color(153, 255, 153));
+                        }
+                        if(this.select_cell_column == column && this.select_cell_row == row ){
+                        c.setBackground(currentDay_Color);
+                        }    
+
+                    }
+                }
+        }
         
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean   isSelected, boolean hasFocus, int row, int column) { 
@@ -100,35 +130,16 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
             JComponent jc = (JComponent)c;
             Object value_present = table.getValueAt(row, column);
             Object value_in_table = CalendarPage.model.getValueAt(row, column);   
-            
-            try {
-                this.arrays();
-            } catch (ParseException ex) {
-                Logger.getLogger(TableColorCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-             
-            // for each date
-            for(int i=0; i<date_arr.size();i++){
-               Calendar cali = new GregorianCalendar();
-//               cali.setTime(date_arr.get(3));
-                cali.setTime(date_arr.get(i));
-                System.out.println(cali.getTime());
-                set_event_Day(table, cali.get(cali.DAY_OF_MONTH));
-                int event_month = cali.get(cali.MONTH) + 1;
-                System.out.println(cali.get(cali.MONTH));
-                int event_year =cali.get(cali.YEAR) ;
-//                System.out.println("event_Day :"+cali.DAY_OF_MONTH+"     event_month : "+ event_month + "  event_year : " + event_year +"\n");
-                
-            }
-            
-            
-            setFirst_Current_Day(table); 
+       
+            setFirst_Current_Day(table);
+           
 
-            //case1:first day of the month  
+//case1:first day of the month  
             if (this.f_row == row && this.f_column == column) {
-                c.setBackground(new Color (255, 128, 225));
-                jc.setBorder( new MatteBorder(2, 2, 2, 2, new Color(255, 51, 207)) );
+                c.setBackground(new Color (255, 230, 255));
+                jc.setBorder( new MatteBorder(2, 2, 2, 2, new Color(255, 128, 255)) );
                 c.setForeground(Color.BLACK);
+                set_event_color(table, row, column, c, jc);
                     //if first day is today
                     if(this.c_row == row && this.c_column == column){
                         c.setForeground(Color.BLUE);
@@ -139,8 +150,9 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                     &&CalendarPage.selected_month == CalendarPage.change_month &&
                     CalendarPage.selected_year == CalendarPage.change_year){
                     c.setBackground(currentDay_Color);
-                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(0, 153, 204)) );
                     c.setForeground(Color.BLACK);
+                    set_event_color(table, row, column, c, jc);
                     //if first day is today
                     if(this.c_row == row && this.c_column == column){
                         c.setForeground(Color.BLUE);
@@ -157,15 +169,16 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                     this.current_year == this.year_inRenderer &&
                     this.current_month == this.month_inRenderer) {
                     c.setBackground(currentDay_Color);
-                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(0, 153, 204)) );
                     c.setBackground(myColor);
                     jc.setBorder(new MatteBorder(-1, -1, -1, -1,Color.BLACK) );
                     c.setForeground(Color.BLUE);
-                    
+                    set_event_color(table, row, column, c, jc);
                     if(this.select_cell_column == column && this.select_cell_row == row ){
                     c.setBackground(currentDay_Color);
-                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(0, 153, 204)) );
                     c.setForeground(Color.BLUE);
+                    set_event_color(table, row, column, c, jc);
                     }
                     
                 }
@@ -175,9 +188,10 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                 c.setBackground(myColor);
                 jc.setBorder(new MatteBorder(-1, -1, -1, -1,Color.BLACK) );
                 c.setForeground(Color.RED);
+                set_event_color(table, row, column, c, jc);
                 if(this.select_cell_column == column && this.select_cell_row == row ){
                     c.setBackground(currentDay_Color);
-                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+//                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(0, 153, 204)) );
                     c.setForeground(Color.RED);
                 }
             }    
@@ -192,46 +206,43 @@ public class TableColorCellRenderer extends DefaultTableCellRenderer {
                    &&CalendarPage.selected_month == CalendarPage.change_month &&
                     CalendarPage.selected_year == CalendarPage.change_year){
                     c.setBackground(currentDay_Color);
-                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(126, 126, 206)) );
+                    jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(0, 153, 204)) );
                     c.setForeground(Color.BLACK);
-                } 
+                }
+//                for(int i=0; i<CalendarPage.date_arr.size();i++){
+//                Calendar cali = new GregorianCalendar();
+//                cali.setTime(CalendarPage.date_arr.get(i));
+//                set_event_Day(table, cali.get(Calendar.DAY_OF_MONTH));
+//                int event_month = cali.get(Calendar.MONTH) + 1;
+//                int event_year =cali.get(Calendar.YEAR);
+//                    if(this.event_row == row &&
+//                        this.event_column == column &&
+//                         event_year == this.year_inRenderer &&
+//                        event_month == this.month_inRenderer) 
+//                    {
+//                        System.out.println("goooooooooooooooooooooooooooooo");
+//                        if(CalendarPage.pry_arr.get(i).equals("high")){
+//                          jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(255, 128, 128)) );
+//                          c.setBackground(new Color(255, 128, 128));
+//
+//                        }else if(CalendarPage.pry_arr.get(i).equals("medium")){
+//                           jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(255, 255, 179)) );
+//                           c.setBackground(new Color(255, 255, 179));
+//
+//                        }else if(CalendarPage.pry_arr.get(i).equals("low")){
+//                           jc.setBorder(new MatteBorder(2, 2, 2, 2, new Color(153, 255, 153)) );
+//                           c.setBackground(new Color(153, 255, 153));
+//                        }
+//                        if(this.select_cell_column == column && this.select_cell_row == row ){
+//                        c.setBackground(currentDay_Color);
+//                        }    
+//
+//                    }
+//                }
+                set_event_color(table, row, column, c, jc);
             }
                 return c;
-        }
-        
-        public void arrays() throws ParseException{
-                int id = ICalendarFrame.user_id;       
-      
-            Connection connection = DBconnection.connectToDatabase();
-            if(connection != null){
-                try {
-                      String query = "SELECT  eventDate,eventTime, priority FROM events where UserID =  '" + id + "'";
-                      PreparedStatement pstmt = (PreparedStatement)
-                      connection.prepareStatement(query);
-                      ResultSet rs = pstmt.executeQuery();
-                      
-                      int i = 0;
-                      int j = 0;
-                      while(rs.next()){
-                          
-                        String dat = rs.getString("eventDate");
-                        String time = rs.getString("eventTime");
-                        String priority = rs.getString("priority");
-                        Date date_time = new SimpleDateFormat("hh:mm aaa").parse(time);
-                        Date date=new SimpleDateFormat("yyyy-MM-dd").parse(dat);
-                        
-                        this.date_arr.add(TimeCalculate.copyTimeToDate(date, date_time));
-                        this.pry_arr.add(priority);
-                        
-                      }
-                      
-                      connection.close();
-                }catch (SQLException ex){
-                    Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }else{
-                System.out.println("NO DATABASE CONNECTION!");
-            }
-        }
+        } 
 
 }
+

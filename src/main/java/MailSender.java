@@ -132,7 +132,7 @@ public class MailSender {
         try{
          
         message.setFrom(new InternetAddress(_mailAddress));
-        message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+        message.setRecipients(Message.RecipientType.CC, InternetAddress.parse(recepient));
         message.setSubject("Event");
         String msg = getData(s);
         message.setText(msg);

@@ -37,12 +37,12 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="ff" type="rgb"/>
+          <Color blue="ff" green="ff" red="e6" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder thickness="4">
-              <Color PropertyName="color" blue="0" green="0" red="cc" type="rgb"/>
+              <Color PropertyName="color" blue="ff" green="ff" red="0" type="rgb"/>
             </LineBorder>
           </Border>
         </Property>
@@ -77,12 +77,12 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="ff" type="rgb"/>
+              <Color blue="ff" green="ff" red="e6" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder thickness="4">
-                  <Color PropertyName="color" blue="0" green="0" red="cc" type="rgb"/>
+                  <Color PropertyName="color" blue="ff" green="ff" red="0" type="rgb"/>
                 </LineBorder>
               </Border>
             </Property>
@@ -112,7 +112,7 @@
                           <Component id="jbtnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbtnEdit1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbtnBack" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="exportPdfBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="exportPdfBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
@@ -167,7 +167,14 @@
             </Component>
             <Component class="javax.swing.JButton" name="exportPdfBtn">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Calibri" size="18" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Export PDF"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportPdfBtnActionPerformed"/>
@@ -178,12 +185,12 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="ff" type="rgb"/>
+              <Color blue="ff" green="ff" red="e6" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder thickness="4">
-                  <Color PropertyName="color" blue="0" green="0" red="cc" type="rgb"/>
+                  <Color PropertyName="color" blue="ff" green="ff" red="0" type="rgb"/>
                 </LineBorder>
               </Border>
             </Property>
@@ -218,12 +225,12 @@
             <Container class="javax.swing.JPanel" name="jPanel6">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                  <Color blue="ff" green="ff" red="e6" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder thickness="4">
-                      <Color PropertyName="color" blue="0" green="0" red="cc" type="rgb"/>
+                      <Color PropertyName="color" blue="ff" green="ff" red="0" type="rgb"/>
                     </LineBorder>
                   </Border>
                 </Property>
@@ -242,8 +249,8 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jtxtParticipant" min="-2" pref="626" max="-2" attributes="0"/>
-                                      <Component id="jtxtLocation" min="-2" pref="626" max="-2" attributes="0"/>
+                                      <Component id="jtxtEventParticipant" min="-2" pref="626" max="-2" attributes="0"/>
+                                      <Component id="jtxtEventLocation" min="-2" pref="626" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -260,14 +267,14 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="jtxtDate" min="-2" pref="143" max="-2" attributes="0"/>
+                                          <Component id="jtxtEventDate" min="-2" pref="143" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                                           <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jtxtTime" min="-2" pref="143" max="-2" attributes="0"/>
+                                          <Component id="jtxtEventTime" min="-2" pref="143" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jtxtDuration" alignment="1" min="-2" pref="626" max="-2" attributes="0"/>
+                                          <Component id="jtxtEventDuration" alignment="1" min="-2" pref="626" max="-2" attributes="0"/>
                                           <Component id="jtxtEventName" alignment="1" min="-2" pref="626" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -299,31 +306,31 @@
                                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jlDate" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                              <Component id="jtxtDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="jtxtEventDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                                              <Component id="jtxtTime" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="jtxtEventTime" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jlDuration" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="jtxtDuration" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="jtxtEventDuration" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jlLocation" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="jtxtLocation" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="jtxtEventLocation" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jlParticipants" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="jtxtParticipant" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="jtxtEventParticipant" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
                               </Group>
@@ -370,7 +377,7 @@
                     <Property name="text" type="java.lang.String" value="Duration"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtxtDuration">
+                <Component class="javax.swing.JTextField" name="jtxtEventDuration">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -388,7 +395,7 @@
                     <Property name="text" type="java.lang.String" value="Location"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtxtLocation">
+                <Component class="javax.swing.JTextField" name="jtxtEventLocation">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -403,7 +410,7 @@
                     <Property name="text" type="java.lang.String" value="Participants"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtxtParticipant">
+                <Component class="javax.swing.JTextField" name="jtxtEventParticipant">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -413,12 +420,12 @@
                 <Container class="javax.swing.JPanel" name="jPanel4">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                      <Color blue="ff" green="ff" red="e6" type="rgb"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder thickness="4">
-                          <Color PropertyName="color" blue="0" green="0" red="cc" type="rgb"/>
+                          <Color PropertyName="color" blue="ff" green="ff" red="0" type="rgb"/>
                         </LineBorder>
                       </Border>
                     </Property>
@@ -531,9 +538,12 @@
                 <Component class="javax.swing.JTextField" name="jtxtEventID">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtxtDate">
+                <Component class="javax.swing.JTextField" name="jtxtEventDate">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
@@ -543,7 +553,7 @@
                     <Property name="text" type="java.lang.String" value="Time"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jtxtTime">
+                <Component class="javax.swing.JTextField" name="jtxtEventTime">
                 </Component>
               </SubComponents>
             </Container>

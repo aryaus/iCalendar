@@ -464,11 +464,14 @@ public class AdminPage extends javax.swing.JFrame {
                 String id = jtxtID.getText();
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Do want to Delete the User", "Warning",JOptionPane.YES_NO_OPTION);
                 if(dialogResult == JOptionPane.YES_OPTION){
+                    PreparedStatement delete_event = connection.prepareStatement("delete from events where userID = ?");
+                    delete_event.setInt(1,Integer.parseInt(id));
+                    delete_event.executeUpdate();
                 
                     PreparedStatement delete = connection.prepareStatement("delete from users where id = ?");
                     delete.setInt(1,Integer.parseInt(id));
 
-                    int i= delete.executeUpdate();
+                    int i = delete.executeUpdate();
                     if(i >=1){
                     
                         JOptionPane.showMessageDialog(null,"Information has been deleted!");
@@ -485,13 +488,14 @@ public class AdminPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Delete failed!");
                     }
                 }
-            connection.close();
+
             } catch (SQLException ex){
                 Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
             System.out.println("NO DATABASE CONNECTION!");
         }
+    
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 /**
  *  If you press the reset button, all jTextFields will be cleared
@@ -526,12 +530,9 @@ public class AdminPage extends javax.swing.JFrame {
                 String Username = jtxtUserName.getText();
                 String id = jtxtID.getText();
                 Statement stmt = connection.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from users where uname='"+Username+"'");
-                if(rs.next()){
-                JOptionPane.showMessageDialog(null, "This Username already exists. Please pick another Username","ERROR",JOptionPane.ERROR_MESSAGE);
-                }else{
-                PreparedStatement update = connection.prepareStatement("update users set fname = ?,lname = ?,email = ?,uname = ? where id = ?");
                 
+                    
+                PreparedStatement update = connection.prepareStatement("update users set fname = ?,lname = ?,email = ?,uname = ? where id = ?");
                 update.setString(1,Firstname);
                 update.setString(2,Lastname);
                 update.setString(3,Email);
@@ -555,8 +556,8 @@ public class AdminPage extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(null,"Update failed!");
                 }
-                }
-            connection.close();
+                
+                
             } catch (SQLException ex){
                 Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
             }

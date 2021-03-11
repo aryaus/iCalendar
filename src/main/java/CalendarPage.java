@@ -17,8 +17,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.Vector;
@@ -53,7 +58,8 @@ public final class CalendarPage extends javax.swing.JFrame {
     public static int change_year;
     public static int change_day = 0;
     
-    
+    public static List<Date> date_arr = new ArrayList<>();
+    public static List<String> pry_arr = new ArrayList<>();
     
     
     Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
@@ -192,7 +198,14 @@ public final class CalendarPage extends javax.swing.JFrame {
         jTable1.setModel(model);
         this.updateMonth();
         setCurrentAndFirstDayRowandColumn();
-        
+        /**
+         * calls methode arrays()
+         */
+                    try {
+                this.arrays();
+            } catch (ParseException ex) {
+                Logger.getLogger(TableColorCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+            }            
         
 }
 
@@ -771,6 +784,45 @@ public final class CalendarPage extends javax.swing.JFrame {
         }
         
     }
+    
+    
+    public void arrays() throws ParseException{
+                int id = ICalendarFrame.user_id;       
+      
+            Connection connection = DBconnection.connectToDatabase();
+            if(connection != null){
+                try {
+                      String query = "SELECT  eventDate,eventTime, priority FROM events where UserID =  '" + id + "' ORDER BY priority='high', priority='medium', priority='low'";
+                      PreparedStatement pstmt = (PreparedStatement)
+                      connection.prepareStatement(query);
+                      ResultSet rs = pstmt.executeQuery();
+                      
+                      int i = 0;
+                      int j = 0;
+                      while(rs.next()){
+                          
+                        String dat = rs.getString("eventDate");
+                        String time = rs.getString("eventTime");
+                        String priority = rs.getString("priority");
+                        Date date_time = new SimpleDateFormat("hh:mm aaa").parse(time);
+                        Date date=new SimpleDateFormat("yyyy-MM-dd").parse(dat);
+                        
+                        CalendarPage.date_arr.add(TimeCalculate.copyTimeToDate(date, date_time));
+                        CalendarPage.pry_arr.add(priority);
+                        
+                      }
+                      
+                      connection.close();
+                }catch (SQLException ex){
+                    Logger.getLogger(ICalendarFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                System.out.println("NO DATABASE CONNECTION!");
+            }
+        }
+    
+    
+    
     
     /**
      * this is the mail method, which will call the calendar page and make it visible
